@@ -1,0 +1,15 @@
+import alt from "alt";
+import _u from "../_util";
+
+const @ClassName@ = _u.load("@type@/@class-name@");
+
+beforeEach(_u.startWatch); /* ..and.. */ afterEach(_u.stopWatch);
+
+// see https://github.com/jdlehman/alt-example-tests on how to write
+// tests for alt
+
+describe("@ClassName@", () => {
+   it("shouldn't have any tests", () => {
+      true.should.be(false);
+   });
+});

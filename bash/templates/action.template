@@ -1,0 +1,11 @@
+import alt from "./app.jsx";
+
+class @ClassName@Actions {
+   constructor() {
+      this.generateActions("update@ClassName@");
+   }
+
+   // additional, non-obvious actions...
+}
+
+export default alt.createActions(@ClassName@Actions);

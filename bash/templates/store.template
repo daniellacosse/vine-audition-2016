@@ -1,0 +1,18 @@
+import alt from "../alt.jsx";
+import @ClassName@Actions from "../action/@class-name@";
+
+class @ClassName@Store {
+   constructor() {
+      this.bindActions(@ClassName@Actions);
+
+      // set initial store properties here...
+   }
+
+   /* ========== EVENT HANDLERS ============*/
+
+   update@ClassName@() {
+      this.setState(/* args */);
+   }
+}
+
+export default alt.createStore(@ClassName@Store)

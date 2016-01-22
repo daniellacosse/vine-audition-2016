@@ -1,0 +1,26 @@
+import React from "react";
+import View from "./_view.jsx";
+import connectToStores from "alt/utils/connectToStores";
+
+import @ClassName@Store from "../store/@class-name@.js"
+
+class @ClassName@ extends View {
+   static getStores() {
+      return [@ClassName@Store];
+   }
+
+   static getPropsFromStores() {
+      return @ClassName@Store.getState();
+   }
+
+   render () {
+      return (
+         <section {...this.props}>
+            // ...
+            {this.props.children}
+         </section>
+      )
+   }
+}
+
+export default connectToStores(@ClassName@)
