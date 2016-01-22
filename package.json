@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "alt": "^0.18.1",
+    "axios": "^0.9.0",
     "babel-core": "^6.4.5",
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",
+    "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
     "gulp-concat": "^2.6.0",
     "gulp-ejs": "^2.0.0",
@@ -17,12 +19,11 @@
     "gulp-svgmin": "^1.2.1",
     "gulp-svgstore": "^5.0.5",
     "gulp-uglify": "^1.5.1",
-    "gulp": "^3.9.0",
     "history": "^1.17.0",
+    "react": "^0.14.6",
     "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6",
-    "react-router": "^1.0.3",
-    "react": "^0.14.6"
+    "react-router": "^1.0.3"
   },
   "devDependencies": {
     "chai": "^3.4.1",
@@ -31,6 +32,14 @@
   },
   "scripts": {
     "start": "npm install && gulp",
-    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register"
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register",
+    "generate": "bash ./bash/generate.sh",
+    "decimate": "bash ./bash/decimate.sh",
+    "release": "git push heroku master",
+    "s": "npm run start",
+    "t": "npm run test",
+    "g": "npm run generate",
+    "d": "npm run decimate",
+    "r": "npm run release"
   }
 }
