@@ -14,7 +14,7 @@ module.exports = {
     global.window = document.parentWindow;
 
     return require(
-      require("path").join(__dirname, "..", "src/" + filename)
+      require("path").join(__dirname, "..", "source/" + filename)
     ).default;
   },
   react: TestUtils,

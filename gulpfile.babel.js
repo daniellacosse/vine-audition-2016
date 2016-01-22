@@ -136,7 +136,7 @@ gulp.task("watch", () => {
 });
 
 function get(filepath) {
-  return `./src/${filepath}`;
+  return `./source/${filepath}`;
 }
 
 function get_asset(filepath) {
