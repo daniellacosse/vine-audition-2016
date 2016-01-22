@@ -1,9 +1,13 @@
 import Alt from "alt";
-import { Grid, Row } from "react-bootstrap";
+import React from "react";
 import { render } from "react-dom";
-import { Router, Route, browserHistory } from "react-router";
 
-class Index extends Component {
+import { View } from "./components/_index";
+
+import { Router, Route, browserHistory } from "react-router";
+import { Grid, Row } from "react-bootstrap";
+
+class Index extends View {
   render() {
     return (
       <Grid>
