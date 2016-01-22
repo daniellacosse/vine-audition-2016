@@ -2,12 +2,12 @@ import Alt from "alt";
 import React from "react";
 import { render } from "react-dom";
 
-import { View } from "./components/_index";
+import _i from "./components/_index";
 
 import { Router, Route, browserHistory } from "react-router";
 import { Grid, Row } from "react-bootstrap";
 
-class Index extends View {
+class Index extends _i.View {
   render() {
     return (
       <Grid>
@@ -26,7 +26,7 @@ render(
       <Route path="/" component={Index} />
     </Router>
   ),
-  document.findElementById("react-container")
+  document.getElementById("react-container")
 );
 
 export default new Alt();

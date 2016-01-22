@@ -1,6 +1,5 @@
 import gulp from "gulp";
 
-import babel from "gulp-babel";
 import concat from "gulp-concat";
 import connect from "gulp-connect";
 import fontmin from "gulp-fontmin";
@@ -8,11 +7,12 @@ import less from "gulp-less";
 import minify_css from "gulp-minify-css";
 import minify_html from "gulp-minify-html";
 import notify from "gulp-notify";
+import packer from "webpack-stream";
 import plumber from "gulp-plumber";
 import sourcemaps from "gulp-sourcemaps";
 import svgmin from "gulp-svgmin";
 import svgstore from "gulp-svgstore";
-import uglify from "gulp-uglify";
+import webpack from "webpack";
 
 const DESTINATION = "dist";
 
@@ -22,32 +22,21 @@ gulp.task("default", [
   "stylesheets",
   "fonts",
   "index",
-  "serve",
-  "watch"
+  "serve"
 ]);
 
 gulp.task("babel", () => {
-  return gulp.src(get("**/*.+(js|jsx)"))
+  return gulp.src(get("app.jsx"))
     .pipe(
       plumber(handle_error)
     )
     .pipe(
-      sourcemaps.init()
+      packer(
+        packer_settings()
+      )
     )
     .pipe(
-      babel({ presets: ["es2015"] })
-    )
-    .pipe(
-      concat("app.js")
-    )
-    .pipe(
-      uglify()
-    )
-    .pipe(
-      sourcemaps.write()
-    )
-    .pipe(
-      gulp.dest(destination())
+      gulp.dest(DESTINATION)
     );
 });
 
@@ -82,7 +71,7 @@ gulp.task("stylesheets", () => {
       less()
     )
     .pipe(
-      concat("app.css")
+      concat("index.css")
     )
     .pipe(
       minify_css()
@@ -91,7 +80,7 @@ gulp.task("stylesheets", () => {
       sourcemaps.write()
     )
     .pipe(
-      gulp.dest(destination())
+      gulp.dest(DESTINATION)
     );
 });
 
@@ -104,7 +93,7 @@ gulp.task("fonts", () => {
       fontmin()
     )
     .pipe(
-      gulp.dest(destination())
+      gulp.dest(DESTINATION)
     );
 });
 
@@ -117,23 +106,47 @@ gulp.task("index", () => {
       minify_html()
     )
     .pipe(
-      gulp.dest(destination())
+      gulp.dest(DESTINATION)
     );
 });
 
 gulp.task("serve", () => {
-  connect.server(
-    {
-      root: "dist",
-      port: process.env.PORT || 9999,
-      livereload: true
+  connect.server({
+    root: "dist",
+    port: process.env.PORT || 9999,
+    livereload: true
+  });
+});
+
+///\\\///\\\ HELPERS ///\\\///\\\
+
+function packer_settings() {
+  return {
+    devtool: "source-map",
+    watch: true,
+    module: {
+      loaders: [{
+        test: /\.(js|jsx)$/,
+        loader: "babel",
+        exclude: /node_modules/
+      }]
+    },
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+        },
+        output: {
+          comments: false,
+          semicolons: true,
+        },
+      }),
+    ],
+    output: {
+      filename: "index.js"
     }
-  );
-});
-
-gulp.task("watch", () => {
-
-});
+  };
+}
 
 function get(filepath) {
   return `./source/${filepath}`;
@@ -143,8 +156,8 @@ function get_asset(filepath) {
   return `./assets/${filepath}`;
 }
 
-function destination(filepath) {
-  return `./${DESTINATION}/${filepath}`;
+function destination(filename) {
+  return (!!filename) ? `./${DESTINATION}` : `./${DESTINATION}/${filename}`;
 }
 
 function handle_error() {
