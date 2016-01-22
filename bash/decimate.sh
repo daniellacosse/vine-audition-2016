@@ -1,21 +1,21 @@
 #!/bin/bash
-rm  ./app/actions/${1}.js
+rm  ./source/actions/${1}-actions.js
 echo "Deleted ${1} action"
 
-rm  ./app/stores/${1}.js
+rm  ./source/stores/${1}-store.js
 echo "Deleted ${1} store"
 
-rm  ./app/components/${1}.jsx
+rm  ./source/components/${1}.jsx
 echo "Deleted ${1} view"
 
 
-rm  ./test/actions/${1}.spec.js
+rm  ./test/actions/${1}-actions.spec.js
 echo "Deleted ${1} action test"
 
-rm  ./test/stores/${1}.spec.js
+rm  ./test/stores/${1}-store.spec.js
 echo "Deleted ${1} store test"
 
-rm  ./app/components/${1}.spec.js
+rm  ./test/components/${1}.spec.js
 echo "Deleted ${1} view test"
 
 echo "==done"
