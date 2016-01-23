@@ -6,27 +6,29 @@ let sinon = require("sinon");
 let TestUtils = require("react-addons-test-utils");
 
 module.exports = {
-  dispatcherSpy: null,
-  illegalSpy: null,
-  illegalAction: null,
-  illegalActionMethod: null,
-  loadActionSpies: function (illegalAction, illegalActionMethod) {
-    this.illegalAction = illegalAction;
-    this.illegalActionMethod = illegalActionMethod;
-
-    this.dispatcherSpy = sinon.spy(alt.dispatcher, "dispatch");
-    this.illegalSpy = sinon.spy(illegalAction, illegalActionMethod);
-  },
-  restoreActionSpies: function() {
-    alt.dispatcher.dispatch.restore();
-    this.illegalAction[this.illegalActionMethod].restore();
-  },
-  dispatcherSpyAction: function() {
-    return this.dispatcherSpy.args[0][0].action;
-  },
-  dispatcherSpyData: function() {
-    return this.dispatcherSpy.args[0][0].data;
-  },
+  // dispatcherSpy: null,
+  // illegalSpy: null,
+  // illegalAction: null,
+  // illegalActionMethod: null,
+  // loadActionSpies: function (illegalAction, illegalActionMethod) {
+  //   this.illegalAction = illegalAction;
+  //   this.illegalActionMethod = illegalActionMethod;
+  //
+  //   this.dispatcherSpy = sinon.spy(alt.dispatcher, "dispatch");
+  //   this.illegalSpy = sinon.spy(illegalAction, illegalActionMethod);
+  // },
+  // restoreActionSpies: function() {
+  //   alt.dispatcher.dispatch.restore();
+  //   this.illegalAction[this.illegalActionMethod].restore();
+  // },
+  // dispatcherSpyAction: function() {
+  //   console.log(this.dispatcherSpy.args);
+  //   return this.dispatcherSpy.args[0][0].action;
+  // },
+  // dispatcherSpyData: function() {
+  //   console.log(this.dispatcherSpy.args);
+  //   return this.dispatcherSpy.args[0][0].data;
+  // },
   load: function(filename) {
     chai.should();
 

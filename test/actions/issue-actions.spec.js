@@ -1,4 +1,5 @@
 import Helper from "../test-helper";
+import sinon from "sinon";
 
 const IssueActions = Helper.load("actions/issue-actions.js");
 const IllegalActions = Helper.load("actions/illegal-actions.js");
@@ -9,26 +10,37 @@ const IllegalActions = Helper.load("actions/illegal-actions.js");
 describe("IssueActions#fetch_issues", () => {
   beforeEach(Helper.startWatch); /* ..and.. */ afterEach(Helper.stopWatch);
 
+  let action = IssueActions.ISSUE_FETCH;
+  let dispatcherSpy;
+
   beforeEach(() => {
-    let action = IssueActions.ISSUE_FETCH;
-    Helper.loadActionSpies(IllegalActions, "illegalIssue");
+    dispatcherSpy = sinon.spy(Helper, 'dispatch');
+    // this.illegalSpy = sinon.spy(IllegalActions, 'illegalPet');
   });
 
-  afterEach(Helper.restoreActionSpies);
+  afterEach(function() {
+    // clean up our sinon spy so we do not affect other tests
+    Helper.dispatch.restore();
+    // legalActions.illegalPet.restore();
+  });
+
+  // afterEach(Helper.restoreActionSpies);
 
   it("dispatches correctly", () => {
-    IssueActions.issueFetch();
+    IssueActions.fetchIssuePage();
 
-    Helper.dispatcherSpyAction.should.be.equal(action);
-    // Helper.dispatcherSpyData.should.be.deepEqual();
+    console.log(dispatcherSpy.args);
+
+    Helper.dispatcherSpyAction().should.be.equal(action);
+    // Helper.dispatcherSpyData().should.be.deepEqual();
   });
 
   it("dispatches with the page parameter", () => {
-    let page = 2;
+    IssueActions.fetchIssuePage({ page: 2 });
 
-    IssueActions.issueFetch({ page });
+    console.log(dispatcherSpy.args);
 
-    Helper.dispatcherSpyAction.should.be.equal(action);
-    // Helper.dispatcherSpyData.should.be.deepEqual();
+    Helper.dispatcherSpyAction().should.be.equal(action);
+    // Helper.dispatcherSpyData().should.be.deepEqual();
   });
 });

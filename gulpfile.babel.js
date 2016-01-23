@@ -3,12 +3,12 @@ import gulp from "gulp";
 import concat from "gulp-concat";
 import connect from "gulp-connect";
 import fontmin from "gulp-fontmin";
-import less from "gulp-less";
 import minify_css from "gulp-minify-css";
 import minify_html from "gulp-minify-html";
 import notify from "gulp-notify";
 import packer from "webpack-stream";
 import plumber from "gulp-plumber";
+import sass from "gulp-ruby-sass";
 import sourcemaps from "gulp-sourcemaps";
 import svgmin from "gulp-svgmin";
 import svgstore from "gulp-svgstore";
@@ -57,18 +57,11 @@ gulp.task("spritesheet", () => {
 });
 
 gulp.task("stylesheets", () => {
-  return gulp
-    .src(
-      get_asset("stylesheets/*.less")
+  return sass(
+      get_asset("stylesheets/**/*.scss"), { sourcemap: true }
     )
     .pipe(
       plumber(handle_error)
-    )
-    .pipe(
-      sourcemaps.init()
-    )
-    .pipe(
-      less()
     )
     .pipe(
       concat("index.css")

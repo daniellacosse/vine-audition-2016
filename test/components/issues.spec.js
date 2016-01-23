@@ -1,14 +1,14 @@
 import Helper from "../test-helper";
 
-const Issue = Helper.load("components/issue.jsx");
+const Issues = Helper.load("components/issue.jsx");
 
 // see https://github.com/jdlehman/alt-example-tests on how to write
 // tests for alt
 
-describe("Issue", () => {
+describe("Issues", () => {
   beforeEach(Helper.startWatch); /* ..and.. */ afterEach(Helper.stopWatch);
 
   it("shouldn't have any tests", () => {
-    Issue.should.not.exist();
+    Issues.should.not.exist();
   });
 });
