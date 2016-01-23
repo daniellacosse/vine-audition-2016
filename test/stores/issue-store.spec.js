@@ -10,12 +10,14 @@ describe("IssueStore#issuePush", () => {
   beforeEach(Helper.startWatch); /* ..and.. */ afterEach(Helper.stopWatch);
 
   it("listens for new issues", () => {
-    let action = IssueActions.FETCH_ISSUES;
-    let currentIssues = IssueStore.getIssues();
-    let issues = [{ name: "issue1" }, { name: "issue2" }];
+    let action = IssueActions.ISSUE_PUSH;
+    let previousIssues = IssueStore.getIssues();
+    let currentIssues = [{ name: "issue1" }, { name: "issue2" }];
 
-    Helper.dispatch({ issues });
+    Helper.dispatch({ action, issues: currentIssues });
 
-    true.should.be(false);
+    IssueStore.getIssues().should.have.length(
+      previousIssues.length + currentIssues.length
+    );
   });
 });
