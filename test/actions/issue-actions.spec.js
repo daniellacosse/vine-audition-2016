@@ -10,7 +10,7 @@ describe("IssueActions#fetch_issues", () => {
   beforeEach(Helper.startWatch); /* ..and.. */ afterEach(Helper.stopWatch);
 
   beforeEach(() => {
-    let action = IssueActions.FETCH_ISSUES;
+    let action = IssueActions.ISSUE_FETCH;
     Helper.loadActionSpies(IllegalActions, "illegalIssue");
   });
 
@@ -19,7 +19,8 @@ describe("IssueActions#fetch_issues", () => {
   it("dispatches correctly", () => {
     IssueActions.issueFetch();
 
-    true.should.be(false);
+    Helper.dispatcherSpyAction.should.be.equal(action);
+    // Helper.dispatcherSpyData.should.be.deepEqual();
   });
 
   it("dispatches with the page parameter", () => {
@@ -27,6 +28,7 @@ describe("IssueActions#fetch_issues", () => {
 
     IssueActions.issueFetch({ page });
 
-    true.should.be(false);
+    Helper.dispatcherSpyAction.should.be.equal(action);
+    // Helper.dispatcherSpyData.should.be.deepEqual();
   });
 });
