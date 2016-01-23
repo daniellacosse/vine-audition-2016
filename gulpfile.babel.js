@@ -26,7 +26,7 @@ gulp.task("default", [
 ]);
 
 gulp.task("babel", () => {
-  return gulp.src(get("app.jsx"))
+  return gulp.src(get("index.jsx"))
     .pipe(
       plumber(handle_error)
     )
