@@ -5,22 +5,17 @@ const JAX = Helper.load("helpers/ajax-helper.js");
 describe("JAX#constructor", () => {
   beforeEach(Helper.startWatch); /* ..and.. */ afterEach(Helper.stopWatch);
 
-  let root = "http://example.org";
-  let config = {
-    get_users: "users"
-  };
-
   it("should construct when given a simple root", () => {
-    let _ajax = new JAX(root);
+    let _ajax = new JAX("http://example.org");
 
-    _ajax.should.not.have.property("get_users");
+    _ajax.should.not.respondTo("get_users");
     _ajax.should.be.an.instanceof(JAX);
   });
 
   it("should construct when given a vanity method", () => {
-    let _ajax = new JAX(root, config);
+    let _ajax = new JAX("http://example.org", { get_users: "users" });
 
-    _ajax.should.have.property("get_users");
+    _ajax.should.respondTo("get_users");
     _ajax.should.be.an.instanceof(JAX);
   });
 

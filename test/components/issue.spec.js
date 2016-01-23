@@ -9,6 +9,6 @@ describe("Issue", () => {
   beforeEach(Helper.startWatch); /* ..and.. */ afterEach(Helper.stopWatch);
 
   it("shouldn't have any tests", () => {
-    true.should.be(false);
+    Issue.should.not.exist();
   });
 });
