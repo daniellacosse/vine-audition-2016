@@ -1,4 +1,48 @@
-# alt-slug
+# vine audition 2016
+
+Project scoping
+
+Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to hit a couple of the features beyond the mvp phase.
+
+MVP
+
+fork my custom alt-slug repo to start
+generate issue entity
+write issue-store, issue-action, issue tests
+actions.issue_fetch
+store.issue_fetch_okay
+store.issue_fetch_accident
+store.get_issues
+issue.open/close_detail_modal
+
+write issue entity
+
+write tests for ajax-helper
+(stubs for axios) (should fetch from github)
+
+bootstrap index.jsx page
+(issue for issue in issue store)
+(scrolling triggers ajax-helper)
+
+Style
+font, background
+layout
+assets
+css animations (& gpu enhancement)
+
+rain-catcher api (won’t be tdd if I get to this)
+
+throw together a quick rails api that logs you in w/ github.
+
+it remembers what issues you’ve ”rained on” and will return that list in priority order
+
+finally, wayne.ui
+
+really unlikely I’ll get to this as it’s really not ready yet but ”wayne ui” aspires through react to create a number of core cross-platform ui components. If you use wayne-ui you can write an app that compiles to ios/android/web/desktop (theoretically)
+
+<hr>
+
+# powered by "alt slug"
 
 my own personal recipe for spinning up an [alt](http://alt.js.org) app
 
