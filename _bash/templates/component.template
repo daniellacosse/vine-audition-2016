@@ -1,16 +1,16 @@
 import React from "react";
 import View from "./_view.jsx";
-import connectToStores from "alt/utils/connectToStores";
+import connectToStores from "alt-utils/lib/connectToStores";
 
-import @ClassName@Store from "../store/@class-name@.js"
+import @EntityName@Store from "../stores/@entity-name@-store";
 
-class @ClassName@ extends View {
+class @EntityClass@ extends View {
    static getStores() {
-      return [@ClassName@Store];
+      return [@EntityClass@Store];
    }
 
    static getPropsFromStores() {
-      return @ClassName@Store.getState();
+      return @EntityClass@Store.getState();
    }
 
    render () {
@@ -19,8 +19,8 @@ class @ClassName@ extends View {
             // ...
             {this.props.children}
          </section>
-      )
+      );
    }
 }
 
-export default connectToStores(@ClassName@)
+export default connectToStores(@EntityClass@);

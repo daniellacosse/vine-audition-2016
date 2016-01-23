@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "alt": "^0.18.1",
+    "alt-utils": "^1.0.0",
     "axios": "^0.9.0",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
@@ -37,7 +38,7 @@
   },
   "scripts": {
     "start": "npm install && gulp",
-    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register",
+    "test": "./node_modules/.bin/mocha test/**/*.spec.js --ui tdd --compilers js:babel-core/register",
     "generate": "bash ./_bash/generate.sh",
     "decimate": "bash ./_bash/decimate.sh",
     "release": "git push heroku master",

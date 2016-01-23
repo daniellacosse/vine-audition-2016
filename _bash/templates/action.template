@@ -1,11 +1,11 @@
-import alt from "./app.jsx";
+import alt from "../alt";
 
-class @ClassName@Actions {
+class @EntityClass@ {
    constructor() {
-      this.generateActions("update@ClassName@");
+      this.generateActions("update@EntityName@s");
    }
 
    // additional, non-obvious actions...
 }
 
-export default alt.createActions(@ClassName@Actions);
+export default alt.createActions(@EntityClass@);
