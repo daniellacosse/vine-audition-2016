@@ -8,7 +8,7 @@ echo "Deleted ${1} store"
 rm  ./source/components/${1}.jsx
 echo "Deleted ${1} view"
 
-ruby ./bash/decimate.rb ${1}
+ruby ./_bash/decimate.rb ${1}
 
 
 rm  ./test/actions/${1}-actions.spec.js

@@ -38,8 +38,8 @@
   "scripts": {
     "start": "npm install && gulp",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register",
-    "generate": "bash ./bash/generate.sh",
-    "decimate": "bash ./bash/decimate.sh",
+    "generate": "bash ./_bash/generate.sh",
+    "decimate": "bash ./_bash/decimate.sh",
     "release": "git push heroku master",
     "s": "npm run start",
     "t": "npm run test",
