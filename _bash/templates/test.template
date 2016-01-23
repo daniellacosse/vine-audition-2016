@@ -1,7 +1,7 @@
 import alt from "alt";
 import _u from "../_util";
 
-const @ClassName@ = _u.load("@type@/@class-name@");
+const @ClassName@ = _u.load("@class-type@/@class-name@");
 
 beforeEach(_u.startWatch); /* ..and.. */ afterEach(_u.stopWatch);
 
