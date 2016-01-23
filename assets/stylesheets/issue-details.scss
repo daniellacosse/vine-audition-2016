@@ -1,5 +1,11 @@
 .details-row {
   cursor: pointer;
+  height: 100px;
+  padding: 15px;
+  overflow: hidden;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
   &:hover {
     background-color: lightgray;
