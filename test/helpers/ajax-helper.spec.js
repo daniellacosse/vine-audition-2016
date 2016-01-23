@@ -19,6 +19,13 @@ describe("JAX#constructor", () => {
     _ajax.should.be.an.instanceof(JAX);
   });
 
+  it("should only construct vanity methods that are HTTP valid", () => {
+    let _ajax = new JAX("http://example.org", { fetch_users: "users" });
+
+    _ajax.should.not.respondTo("fetch_users");
+    _ajax.should.be.an.instanceof(JAX);
+  });
+
   it("should fail when no arguments are provided", () => {
     let _f = () => {
       let _ajax = new JAX();
