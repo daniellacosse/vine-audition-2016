@@ -1,6 +1,6 @@
 import React from "react";
 import View from "./_view.jsx";
-import Infinite from "react-infinite";
+import Horizon from "./horizon.jsx";
 import { Grid } from "react-bootstrap";
 
 import IssueActions from "../actions/issue-actions";
@@ -25,40 +25,19 @@ class Issues extends View {
   }
 
   render() {
-    let { clientHeight } = document.body;
-    let containerHeight = (clientHeight <= 1000) ? 1000 : clientHeight;
+    let issues = [].concat.apply([], this.props.issuePages);
 
     return (
-      <Infinite
-        className="issues montserrat"
-        elementHeight={100}
-        infiniteLoadBeginEdgeOffset={1000}
-        isInfiniteLoading={this.state.isInfiniteLoading}
-        timeScrollStateLastsForAfterUserScrolls={1000}
-        containerHeight={containerHeight}
-        onInfiniteLoad={this.loadNextPage}
-        useWindowAsScrollContainer
-        {...this.props}
-      >
-        {this.props.issuePages.map((issues) => {
-          return (
-            <Grid>
-              { issues.map(issue => <IssueDetails issueObject={issue} />) }
-            </Grid>
-          );
-        })}
-      </Infinite>
+      <Horizon fetcher={this.loadNextPage} fetchDepth={1000}>
+        <Grid>
+          { issues.map(issue => <IssueDetails issueObject={issue} />) }
+        </Grid>
+      </Horizon>
     );
   }
 
-  loadNextPage() {
-    this.setState({ isInfiniteLoading: true });
-
-    IssueActions
-      .fetchIssuePage(
-        { page: this.props.issuePages.length + 1 },
-        () => this.setState({ isInfiniteLoading: false })
-      );
+  loadNextPage(page, done) {
+    IssueActions.fetchIssuePage({ page }, done);
   }
 }
 
