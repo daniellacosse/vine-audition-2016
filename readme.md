@@ -19,7 +19,7 @@ Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to h
 
 * ~~issues.jsx~~
   * ~~(issue for issue in issue store)~~
-  * (scrolling triggers ajax-helper)
+  * gonna have to roll my own scroller, the ones I'm finding are p. dumb
   * tests
 
 * need to go back and make action/store tests pass.
@@ -29,12 +29,22 @@ Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to h
   * ~~basic layout~~
     * mobile
     * cross-browser (modern, gdiaf IE)
+  * refactor and fuss over css for way too long
+  * some text processing stuff
+    * markdown parsing
+    * detect users w/ @
+    * detect links (starting with http://)
+    * 140 characters minus word partial
+    * embolden asker's name in the comments
+    * remind who's asking the question in the detail
+    * time stamps
   * assets
+    * open/closed icons
   * loader
   * jump to top
   * ~~css animations? (& gpu enhancement)~~
 
-### rain-catcher api (won’t be tdd if I get to this)
+### rain-catcher api (won’t be tdd if I get to this -- kind of failed at that with the self-imposed weekend deadline anyway)
 
 throw together a quick rails api that logs you in w/ github.
 
