@@ -8,10 +8,10 @@ Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to h
 
 * ~~fork my custom alt-slug repo to start~~
 * ~~generate issue entity~~
-* ~~write issue-store, issue-action, issue tests~~
+* ~~write issue-store, issue-action tests~~
 * ~~actions.fetchIssuePage~~
-  * ~~store.fetchIssuePage~~
-  * ~~issue.open/closeModal~~
+* ~~store.fetchIssuePage~~
+
 
 * ~~~write issue entity~~~
 
@@ -20,12 +20,19 @@ Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to h
 * ~~issues.jsx~~
   * ~~(issue for issue in issue store)~~
   * (scrolling triggers ajax-helper)
+  * tests
+
+* need to go back and make action/store tests pass.
 
 ### Style
   * font, background
   * layout
+    * mobile
+    * cross-browser (modern, gdiaf IE)
   * assets
-  * css animations (& gpu enhancement)
+  * loader
+  * jump to top
+  * css animations? (& gpu enhancement)
 
 ### rain-catcher api (won’t be tdd if I get to this)
 
