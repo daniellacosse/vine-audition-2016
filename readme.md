@@ -17,9 +17,17 @@ realized I should build my own parsing and loading components.
 so revised my high level list of things to tackle
 (may need to spend another afternoon:)
 
-* parser component
+* ~~parser component~~
+    * emphasized user doesn't have link
+    * emphasize poster's comments
   * additional css work & refactoring
+    * spacing
+    * gradient on last word
+    * colors
+    * left align on comments
+
 * custom dynamic loading component
+  * then style labels (finally)
 * error handling
   * mainly, run out of requests (time out) state
 * component tests

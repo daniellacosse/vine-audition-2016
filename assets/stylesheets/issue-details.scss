@@ -13,6 +13,36 @@
   background-color: rgba(0,0,0,0.6);
   color: white;
 
+  .comment-section {
+    font-size: 16;
+    
+    .comment {
+      text-align: left;
+
+      .comment-header {
+        background: lightgray;
+
+        img {
+          margin-right: 5px;
+        }
+      }
+
+      .comment-body {
+
+      }
+    }
+  }
+
+  p, .parser, .parser p {
+    font-weight: 300;
+    opacity: 0.9;
+    font-size: 16;
+
+    span.final-word {
+      -webkit-mask-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 40%);
+    }
+  }
+
   h3 {
     margin-bottom: 10px;
     font-weight: 100;
@@ -24,10 +54,6 @@
   }
 
   a {
-
-  }
-
-  p {
 
   }
 

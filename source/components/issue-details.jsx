@@ -8,7 +8,8 @@ import {
   Image,
   Badge,
   Glyphicon,
-  Grid
+  Grid,
+  Alert
 } from "react-bootstrap";
 import connectToStores from "alt-utils/lib/connectToStores";
 
@@ -16,6 +17,7 @@ import IssueActions from "../actions/issue-actions";
 import IssueStore from "../stores/issue-store";
 
 import axios from "axios";
+import moment from "moment";
 
 export default class IssueDetail extends View {
   constructor(props) {
@@ -32,20 +34,18 @@ export default class IssueDetail extends View {
 
     return (
       <Row className="details-row" onClick={this.openModal}>
-        <Image src={user.avatar_url} width={60} thumbnail/>
+        <Image src={user.avatar_url} width={60} thumbnail />
         <Col style={{
           marginLeft: 73
         }}>
           <h3>
-            <a href={user.html_url}>@{user.login}</a>:
-            <Parser>{issueObject.title}</Parser>
+            <a href={user.html_url}>@{user.login}</a>:&nbsp;
+            {issueObject.title}
             {this.renderLabels()}
           </h3>
-          <p>
-            <Parser>{issueObject.body}</Parser>
-          </p>
+            <Parser inline dropafter={140}>{issueObject.body}</Parser>
         </Col>
-
+        {/* TODO: remind who's asking the question w/ timestamp */}
         <Modal
           className="montserrat"
           show={this.state.modalOpen}
@@ -53,16 +53,20 @@ export default class IssueDetail extends View {
         >
           <Modal.Header>
             <h2>
-              <Glyphicon style={{
-                marginRight: 10
-              }} glyph={(issueObject.state === "open")
-                ? "unchecked"
-                : "checked"}/>
-              <Parser>{issueObject.title}</Parser>
+              <Glyphicon style={{ marginRight: 10 }}
+                glyph={(issueObject.state === "open")
+                  ? "unchecked"
+                  : "checked"}
+              />
+              {issueObject.title}
               {this.renderLabels()}
             </h2>
           </Modal.Header>
           <Modal.Body>
+            <Alert>
+              <Image src={user.avatar_url} width={24} />
+              posted {moment(issueObject.created_at).fromNow()}:
+            </Alert>
             <Parser>{issueObject.body}</Parser>
           </Modal.Body>
           {this.renderComments()}
@@ -77,21 +81,25 @@ export default class IssueDetail extends View {
     if (comments && comments.length) {
       return (
         <Modal.Footer>
-          <Grid>
+          <Grid className="comment-section">
             {comments.map((comment) => {
               let {user} = comment;
 
+              console.log(comment);
+
               return (
-                <Row style={{
-                  fontSize: 16,
-                  textAlign: "left"
-                }}>
-                  <Image style={{
-                    marginRight: 5
-                  }} src={user.avatar_url} width={24}/>
-                  <a href={user.html_url}>@{user.login}</a>:
-                  <Parser>{comment.body}</Parser>
-                </Row>
+                <section className="comment">
+                  <Row className="comment-header">
+                    <Image src={user.avatar_url} width={24}/>
+                    <a href={user.html_url}>@{user.login}</a> responded
+                    <time>{moment(comment.created_at).fromNow()}</time>:
+                  </Row>
+                  <Row className="comment-body">
+                    <Parser inline emphasize={this.props.issueObject.user.login}>
+                      {comment.body}
+                    </Parser>
+                  </Row>
+                </section>
               );
             })}
           </Grid>
