@@ -1,6 +1,6 @@
 import Helper from "../test-helper";
 
-const Issues = Helper.load("components/issue.jsx");
+const Issues = Helper.load("components/issues.jsx");
 
 // see https://github.com/jdlehman/alt-example-tests on how to write
 // tests for alt

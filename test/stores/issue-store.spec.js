@@ -6,18 +6,18 @@ const IssueActions = Helper.load("actions/issue-actions.js");
 // see https://github.com/jdlehman/alt-example-tests on how to write
 // tests for alt
 
-describe("IssueStore#issuePush", () => {
+describe("IssueStore#fetchIssuePage", () => {
   beforeEach(Helper.startWatch); /* ..and.. */ afterEach(Helper.stopWatch);
 
-  it("listens for new issues", () => {
-    let action = IssueActions.ISSUE_PUSH;
+  it("adds fetched issue page to store", () => {
     let previousIssues = IssueStore.getIssues();
     let currentIssues = [{ name: "issue1" }, { name: "issue2" }];
 
-    Helper.dispatch({ action, issues: currentIssues });
+    console.log(IssueStore);
+    IssueStore.fetchIssuePage(currentIssues);
 
     IssueStore.getIssues().should.have.length(
-      previousIssues.length + currentIssues.length
+      previousIssues.length + 1
     );
   });
 });
