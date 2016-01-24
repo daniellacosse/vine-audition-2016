@@ -50,6 +50,16 @@ a img {
 
 /* app-wide styles */
 
+html {
+	background-image: url("background.jpeg");
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+body {
+	background-color: transparent;
+}
+
 h1 {
 	font-size: 35px;
 }
@@ -64,4 +74,15 @@ h3 {
 
 h1, h2, h3 {
 	font-weight: bold;
+}
+
+code {
+	padding: 2px 5px;
+	background: #444;
+	color: white;
+}
+
+pre {
+	margin-top: 5px;
+  padding: 5px 10px;
 }

@@ -3,6 +3,8 @@ import gulp from "gulp";
 import concat from "gulp-concat";
 import connect from "gulp-connect";
 import fontmin from "gulp-fontmin";
+import imagemin from "gulp-imagemin";
+import jpegtran from "imagemin-jpegtran";
 import minify_css from "gulp-minify-css";
 import minify_html from "gulp-minify-html";
 import notify from "gulp-notify";
@@ -19,6 +21,7 @@ const DESTINATION = "dist";
 gulp.task("default", [
   "babel",
   "spritesheet",
+  "background",
   "stylesheets",
   "fonts",
   "index",
@@ -77,8 +80,23 @@ gulp.task("stylesheets", () => {
     );
 });
 
+gulp.task("background", () => {
+    return gulp.src(get_asset("images/background.jpeg"))
+        .pipe(
+          imagemin({
+            progressive: true,
+            use: [
+              jpegtran()
+            ]
+          })
+        )
+        .pipe(
+          gulp.dest(DESTINATION)
+        );
+});
+
 gulp.task("fonts", () => {
-  return gulp.src(get_asset("fonts/*.woff"))
+  return gulp.src(get_asset("fonts/**/*.woff"))
     .pipe(
       plumber(handle_error)
     )
