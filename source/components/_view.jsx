@@ -5,6 +5,7 @@ export default class View extends Component {
 		super(props);
 
 		this.state = {};
+
 	}
 
 	bindFuncs(...funcs) {

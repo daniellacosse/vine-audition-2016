@@ -1,29 +1,15 @@
 import React from "react";
-import { render } from "react-dom";
+import { Router, Route, browserHistory } from "react-router";
 
 import _i from "./components/_index";
-
-import { Router, Route, browserHistory } from "react-router";
-import { Grid, Row } from "react-bootstrap";
+import { render } from "react-dom";
 
 render(
   (
     <Router history={browserHistory}>
-      <Route path="/" component={Index} />
+      <Route path="/" component={_i.Issues}>
+      </Route>
     </Router>
   ),
   document.getElementById("react-container")
 );
-
-export default class Index extends _i.View {
-  render() {
-    return (
-      <Grid>
-        <Row>
-          <h1>HELLO-WELCOME TO ALT-SLUG</h1>
-        </Row>
-        {this.props.children}
-      </Grid>
-    );
-  }
-}
