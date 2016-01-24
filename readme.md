@@ -26,6 +26,8 @@ so revised my high level list of things to tackle
   * any needed refactoring
 * try alt 18 tests once more (will probably post issue on the alt repo today)
   * any needed refactoring (also update alt-slug)
+* misc
+  * livereload
 * confirm deployment!
 
 #### Old:

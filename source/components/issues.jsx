@@ -30,7 +30,7 @@ class Issues extends View {
 
     return (
       <Infinite
-        className="issues"
+        className="issues montserrat"
         elementHeight={100}
         infiniteLoadBeginEdgeOffset={1000}
         isInfiniteLoading={this.state.isInfiniteLoading}
