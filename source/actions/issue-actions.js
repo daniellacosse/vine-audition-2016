@@ -17,7 +17,13 @@ class IssueActions {
     return (dispatch) => {
       this._ajax
         .get_issues({ page })
-        .then((data) => dispatch(data));
+        .then((data) => dispatch(data))
+        .catch((err) => {
+          // TODO refactor into error page/as illegal action
+          if (err.status === 403) {
+            alert("Out of requests. Come back in an hour!");
+          }
+        });
     };
   }
 }
