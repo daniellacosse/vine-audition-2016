@@ -27,7 +27,7 @@ describe("IssueActions#fetchIssuePage", () => {
   // afterEach(Helper.restoreActionSpies);
 
   it("dispatches correctly", () => {
-    let result = new IssueActions().fetchIssuePage();
+    let result = IssueActions.fetchIssuePage();
 
     console.log(result());
     console.log(dispatcherSpy.args);
@@ -37,7 +37,7 @@ describe("IssueActions#fetchIssuePage", () => {
   });
 
   it("dispatches with the page parameter", () => {
-    let result = new IssueActions().fetchIssuePage({ page: 2 });
+    let result = IssueActions.fetchIssuePage({ page: 2 });
 
     console.log(result());
     console.log(dispatcherSpy.args);

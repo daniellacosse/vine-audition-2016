@@ -14,8 +14,6 @@ class Issues extends View {
     super(props);
 
     this.bindFuncs("loadNextPage");
-
-    IssueActions.fetchIssuePage();
   }
 
   static getStores() {
@@ -27,13 +25,19 @@ class Issues extends View {
   }
 
   render() {
+    let { clientHeight } = document.body;
+    let containerHeight = (clientHeight <= 1000) ? 1000 : clientHeight;
+
     return (
       <Infinite
+        className="issues"
         elementHeight={100}
-        containerHeight={window.innerHeight}
-        useWindowAsScrollContainer
-        infiniteLoadBeginEdgeOffset={200}
+        infiniteLoadBeginEdgeOffset={1000}
+        isInfiniteLoading={this.state.isInfiniteLoading}
+        timeScrollStateLastsForAfterUserScrolls={1000}
+        containerHeight={containerHeight}
         onInfiniteLoad={this.loadNextPage}
+        useWindowAsScrollContainer
         {...this.props}
       >
         {this.props.issuePages.map((issues) => {
@@ -48,7 +52,13 @@ class Issues extends View {
   }
 
   loadNextPage() {
-    IssueActions.fetchIssuePage({ page: this.props.issuePages.length + 1 });
+    this.setState({ isInfiniteLoading: true });
+
+    IssueActions
+      .fetchIssuePage(
+        { page: this.props.issuePages.length + 1 },
+        () => this.setState({ isInfiniteLoading: false })
+      );
   }
 }
 

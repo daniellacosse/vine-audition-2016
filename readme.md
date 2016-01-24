@@ -26,13 +26,13 @@ Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to h
 
 ### Style
   * font, background
-  * layout
+  * ~~basic layout~~
     * mobile
     * cross-browser (modern, gdiaf IE)
   * assets
   * loader
   * jump to top
-  * css animations? (& gpu enhancement)
+  * ~~css animations? (& gpu enhancement)~~
 
 ### rain-catcher api (won’t be tdd if I get to this)
 
