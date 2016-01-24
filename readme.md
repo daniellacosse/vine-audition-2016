@@ -6,22 +6,19 @@ Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to h
 
 ### MVP
 
-* fork my custom alt-slug repo to start
-* generate issue entity
-* write issue-store, issue-action, issue tests
-* actions.issue_fetch
-  * store.issue_fetch_okay
-  * store.issue_fetch_accident
-  * store.get_issues
-  * issue.open/close_detail_modal
+* ~~fork my custom alt-slug repo to start~~
+* ~~generate issue entity~~
+* ~~write issue-store, issue-action, issue tests~~
+* ~~actions.fetchIssuePage~~
+  * ~~store.fetchIssuePage~~
+  * ~~issue.open/closeModal~~
 
-* write issue entity
+* ~~~write issue entity~~~
 
-* write tests for ajax-helper
-  * (stubs for axios) (should fetch from github)
+* ~~~write tests for ajax-helper~~~
 
-* bootstrap index.jsx page
-  * (issue for issue in issue store)
+* ~~issues.jsx~~
+  * ~~(issue for issue in issue store)~~
   * (scrolling triggers ajax-helper)
 
 ### Style
