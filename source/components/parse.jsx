@@ -3,7 +3,7 @@ import View from "./_view.jsx";
 
 import Markdown from "react-remarkable";
 
-export default class Parser extends View {
+export default class Parse extends View {
   render() {
     let {children, options} = this.props;
     let wrappedChildren = (Array.isArray(children)) ? children : [ children ];
