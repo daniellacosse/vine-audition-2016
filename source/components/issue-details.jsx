@@ -2,12 +2,15 @@ import axios from "axios";
 import moment from "moment";
 
 import React from "react";
-import View from "./_view.jsx";
-import Parse from "./parse.jsx";
 import {
   Row, Col, Modal, Image, Badge, Glyphicon, Grid, Alert,
   ListGroup, ListGroupItem
 } from "react-bootstrap";
+
+// TODO: use index
+import View from "./_view.jsx";
+import Parse from "./parse.jsx";
+import GithubUser from "./github-user.jsx";
 
 import IssueActions from "../actions/issue-actions";
 import IssueStore from "../stores/issue-store";
@@ -24,7 +27,6 @@ export default class IssueDetail extends View {
       "closeModal",
       "openModal",
       "renderComments",
-      "renderInlineAvatar",
       "renderLabels",
       "renderModal"
     );
@@ -36,11 +38,11 @@ export default class IssueDetail extends View {
 
     return (
       <Row className="details-row" onClick={this.openModal}>
-        {this.renderAvatar(user, 60)}
+        <GithubUser size={78} userData={user} />
 
-        <Col style={{ marginLeft: 73 }}>
+        <Col style={{ marginLeft: 111 }}>
           <h3>
-            {this.renderUserLink(user)}: {issueData.title}
+            <GithubUser link userData={user} />: {issueData.title}
             {this.renderLabels(issueData)}
           </h3>
           <Parse inline dropafter={140}>{issueData.body}</Parse>
@@ -51,12 +53,11 @@ export default class IssueDetail extends View {
     );
   }
 
-  // TODO: the hell do labels look like
   renderLabels(issueData) {
     if (issueData.labels && issueData.labels.length) {
       return issueData.labels.map(label => {
         return (
-          <Badge style={{ background: `#${label.color}`, marginLeft: 10, borderRadius: 1 }}>
+          <Badge style={{ background: `#${label.color}` }}>
             {label.name.replace(/-/g, " ")}
           </Badge>
         );
@@ -83,31 +84,40 @@ export default class IssueDetail extends View {
           </h2>
         </Modal.Header>
         <Alert>
-          {this.renderInlineAvatar(issueData.user)} posted {this.since(issueData.created_at)}
+          <GithubUser inline userData={issueData.user} /> posted
+            {this.since(issueData.created_at)}
         </Alert>
         <Modal.Body>
-          <Parse>{issueData.body}</Parse>
+          <Parse linkify>{issueData.body}</Parse>
         </Modal.Body>
-        {this.renderComments(this.state.comments)}
+        {this.renderComments(this.state.comments, issueData.user)}
       </Modal>
     );
   }
 
-  renderComments(comments) {
+  renderComments(comments, poster) {
     if (comments && comments.length) {
       return (
         <Modal.Footer>
           <ListGroup className="comment-section">
-            {comments.map((comment) => {
-              let responseLine = (
+            {comments.map((comment, i) => {
+              let isOriginalUser, responseLine = (
                 <span>
-                  {this.renderInlineAvatar(comment.user)} responded {this.since(comment.created_at)}:
+                  <GithubUser inline userData={comment.user} /> responded
+                    {this.since(comment.created_at)}:
                 </span>
               );
 
+              if (comment.user.login === poster.login)
+                isOriginalUser = "original-user";
+
               return (
-                <ListGroupItem className="comment" header={responseLine}>
-                  <Parse inline emphasize={this.props.issueData.user.login}>
+                <ListGroupItem
+                  key={i}
+                  className={`comment ${isOriginalUser}`}
+                  header={responseLine}
+                >
+                  <Parse inline linkify emphasize={poster.login}>
                     {comment.body}
                   </Parse>
                 </ListGroupItem>
@@ -131,23 +141,5 @@ export default class IssueDetail extends View {
 
   since(dateString) {
     return moment(dateString).fromNow();
-  }
-
-  // TODO: avatar is clearly its own component
-  renderAvatar(user, size) {
-    return <Image src={user.avatar_url} width={size}/>;
-  }
-
-  renderUserLink(user) {
-    return <a href={user.html_url}>@{user.login}</a>;
-  }
-
-  renderInlineAvatar(user, size = 24) {
-    return (
-      <span className="inline-avatar">
-        {this.renderAvatar(user, size)}
-        {this.renderUserLink(user)}
-      </span>
-    );
   }
 }
