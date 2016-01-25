@@ -1,11 +1,13 @@
 import React from "react";
 import View from "./_view.jsx";
 import { Grid } from "react-bootstrap";
+
+// TODO: use index
 import Horizon from "./horizon.jsx";
+import IssueDetails from "./issue-details.jsx";
 
 import IssueActions from "../actions/issue-actions";
 import IssueStore from "../stores/issue-store";
-import IssueDetails from "../components/issue-details.jsx";
 
 import connectToStores from "alt-utils/lib/connectToStores";
 
@@ -28,11 +30,19 @@ class Issues extends View {
 
   render() {
     return (
-      <Horizon fetcher={this.loadNextPage} fetchDepth={1000} prefix={PAGE_PREFIX}>
+      <Horizon
+        fetcher={this.loadNextPage}
+        fetchDepth={5000}
+        prefix={PAGE_PREFIX}
+      >
         {this.props.issuePages.map((page, i) => {
           return (
             <Grid id={`${PAGE_PREFIX}-${i}`} key={i}>
-              { page.map((issue, j) => <IssueDetails issueData={issue} key={j} />) }
+              {
+                page.map(
+                  (issue, j) => <IssueDetails issueData={issue} key={j} />
+                )
+              }
             </Grid>
           );
         })}

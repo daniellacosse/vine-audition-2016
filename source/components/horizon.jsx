@@ -1,7 +1,8 @@
 import React from "react";
+import View from "./_view.jsx";
 import ReactDOM from "react-dom";
 import { Grid } from "react-bootstrap";
-import View from "./_view.jsx";
+
 import HorizonLoader from "./horizon-loader.jsx";
 
 import mixin from "react-mixin";
@@ -69,7 +70,7 @@ class Horizon extends View {
 
     let { fetchDepth, children } = this.props;
     let { clientHeight, offsetTop } = this.getDOMNode();
-    
+
     let scrollPosition = window.pageYOffset - offsetTop;
     let scrollDepth = clientHeight - scrollPosition;
 

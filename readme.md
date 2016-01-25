@@ -32,11 +32,11 @@ so revised my high level list of things to tackle
   * ~~more sophisticated back logic & UI~~
     * ~~hide back on scroll up~~
     * ~~option to go to page or all the way to top~~
-    * 25 at a time, not 30
+    * ~~25 at a time, not 30~~
+
 * error handling
   * ~~mainly, run out of requests state~~
     * ~~should refactor into index~~ w/ issue & error pages
-
 * component tests
   * any needed refactoring
 * try alt 18 tests once more (will probably post issue on the alt repo today)

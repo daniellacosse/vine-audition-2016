@@ -1,6 +1,6 @@
 import React from "react";
-import { Image } from "react-bootstrap";
 import View from "./_view.jsx";
+import { Image } from "react-bootstrap";
 
 const THUMB_SIZE = 24;
 

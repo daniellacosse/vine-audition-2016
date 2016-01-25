@@ -1,5 +1,4 @@
 import React from "react";
-
 import View from "./_view.jsx";
 
 export default class HorizonSVGLoader extends View {
