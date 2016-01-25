@@ -11,18 +11,25 @@ class IssueActions {
     });
   }
 
-  fetchIssuePage(options) {
+  fetchIssuePage(options, done) {
     let { page } = (!!options) ? options : {};
 
     return (dispatch) => {
       this._ajax
         .get_issues({ page })
-        .then((data) => dispatch(data))
+        .then((data) => {
+          if (done) done();
+          return dispatch(data);
+        })
         .catch((err) => {
           // TODO refactor into error page/as illegal action
           if (err.status === 403) {
             alert("Out of requests. Come back in an hour!");
+          } else {
+            console.error(err);
           }
+
+          done();
         });
     };
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
 export default class View extends Component {
 	constructor(props) {
@@ -6,6 +7,11 @@ export default class View extends Component {
 
 		this.state = {};
 
+		this.bindFuncs("getDOMNode");
+	}
+
+	getDOMNode() {
+		return ReactDOM.findDOMNode(this);
 	}
 
 	bindFuncs(...funcs) {

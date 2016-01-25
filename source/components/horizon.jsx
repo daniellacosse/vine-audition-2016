@@ -1,5 +1,8 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import View from "./_view.jsx";
+import { Grid } from "react-bootstrap";
+
 import mixin from "react-mixin";
 import { OnScroll } from "react-window-mixins";
 
@@ -7,59 +10,64 @@ class Horizon extends View {
   constructor(props) {
     super(props);
 
-    this.bindFuncs("fetchChildren", "jumpToTop");
+    this.bindFuncs("fetchChildren", "jumpToTop", "onScroll");
 
-     // or innerheight < fetchDepth,
-    if (!this.props.children || !this.props.children.length)
-      this.fetchChildren();
+    this.state.fetchCall = 0;
   }
 
   render() {
     let loader, jumper;
 
-    if (this.state.loading) {
-      loader = "Loading...";
+    if (this.state.fetching) {
+      loader = <span className="loader">Loading...</span>;
     }
 
     if (this.state.canJump) {
-      jumper = <div onClick={this.jumpToTop}>Back</div>;
+      jumper = <div className="jumper" onClick={this.jumpToTop}>Back</div>;
     }
 
     return (
       <section id="horizon">
         <div className="loading-container">{loader}</div>
-        {this.props.children}
+        <Grid>{this.props.children}</Grid>
         <div className="jumping-container">{jumper}</div>
       </section>
     );
   }
 
   fetchChildren() {
-    this.props.fetcher(this.state.fetchCall, (done) => {
-      this.setState({
-        loading: false,
-        fetchCall: this.state.fetchCall + 1
-      });
+    let callNumber, {fetching, fetchCall} = this.state;
+
+    if (fetching) return;
+    else callNumber = this.state.fetchCall + 1;
+
+    this.setState({
+      fetching: true, fetchCall: callNumber
+    });
+
+    this.props.fetcher(callNumber, () => {
+      this.setState({ fetching: false });
     });
   }
 
   onScroll() {
-    let loading, canJump;
-    let DOMNode = this.getDOMNode();
-    let scrollPosition = window.pageYOffset - DOMNode.offsetTop;
-    let scrollDepth = DOMNode.innerHeight - DOMNode.offsetTop;
+    let canJump, { clientHeight, offsetTop } = this.getDOMNode();
+    let {fetchDepth} = this.props;
+    let scrollPosition = window.pageYOffset - offsetTop;
+    let scrollDepth = clientHeight - scrollPosition;
 
-    if (scrollPosition > 0) canJump = true;
+    if (scrollPosition > window.innerHeight) canJump = true;
 
-    if ((scrollDepth < fetchDepth) && !this.state.loading)
-      loading = true; /* ..and.. */ this.fetchChildren();
+    if ((scrollDepth < fetchDepth) || (clientHeight < fetchDepth))
+      this.fetchChildren();
 
-    this.setState({ scrollPosition, loading, canJump });
+    this.setState({ scrollPosition, canJump });
   }
 
   jumpToTop() {
+    scroll(0, 0);
     this.setState({ scrollPosition: 0 });
   }
 }
 
-export default mixin(Horizon.prototype, OnScroll);
+mixin(Horizon.prototype, OnScroll); /* ..and.. */ export default Horizon;

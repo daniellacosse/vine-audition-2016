@@ -16,8 +16,12 @@ class IssueStore {
 
    /* ========== EVENT HANDLERS ============*/
 
-   fetchIssuePage(issues) {
-      this.issuePages.push(issues);
+   fetchIssuePage(issuePage) {
+     let issuePages = this.issuePages;
+
+     issuePages.push(issuePage);
+
+     this.setState({ issuePages });
    }
 }
 

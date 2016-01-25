@@ -1,7 +1,6 @@
 import React from "react";
 import View from "./_view.jsx";
 import Horizon from "./horizon.jsx";
-import { Grid } from "react-bootstrap";
 
 import IssueActions from "../actions/issue-actions";
 import IssueStore from "../stores/issue-store";
@@ -29,9 +28,7 @@ class Issues extends View {
 
     return (
       <Horizon fetcher={this.loadNextPage} fetchDepth={1000}>
-        <Grid>
-          { issues.map(issue => <IssueDetails issueObject={issue} />) }
-        </Grid>
+        { issues.map((issue, i) => <IssueDetails issueData={issue} key={i} />) }
       </Horizon>
     );
   }

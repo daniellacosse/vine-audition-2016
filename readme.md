@@ -24,10 +24,10 @@ so revised my high level list of things to tackle
     * spacing
     * gradient on last word
     * colors
-    * left align on comments
+    * ~~left align on comments~~
 
-* custom dynamic loading component
-  * then style labels (finally)
+* ~~custom dynamic loading component~~
+  * ~~then style labels (finally)~~
 * error handling
   * ~~mainly, run out of requests state~~
     * should refactor into index w/ issue & error pages
