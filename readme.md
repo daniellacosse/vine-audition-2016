@@ -25,13 +25,13 @@ so revised my high level list of things to tackle
     * ~~gradient on last word~~
     * ~~colors~~
     * ~~left align on comments~~
-    * loading and back icons
+    * ~~loading and back icons~~
 
 * ~~custom dynamic loading component~~
   * ~~then style labels (finally)~~
-  * more sophisticated back logic & UI
-    * hide back on scroll up
-    * option to go to page or all the way to top
+  * ~~more sophisticated back logic & UI~~
+    * ~~hide back on scroll up~~
+    * ~~option to go to page or all the way to top~~
     * 25 at a time, not 30
 * error handling
   * ~~mainly, run out of requests state~~

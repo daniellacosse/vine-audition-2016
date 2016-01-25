@@ -1,0 +1,39 @@
+.page-up-icon {
+  background-image: url("page-up.svg");
+}
+
+.home-icon {
+  background-image: url("home.svg");
+}
+
+.pageup-icon, .home-icon {
+  display: inline-block;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#loading-icon {
+  width: 45px;
+
+  circle {
+    -webkit-animation: pull-down 1.1s cubic-bezier(.44,.16,.01,1) infinite;
+    -moz-animation: pull-down 1.1s cubic-bezier(.44,.16,.01,1) infinite;
+    -o-animation: pull-down 1.1s cubic-bezier(.44,.16,.01,1) infinite;
+    animation: pull-down 1.1s cubic-bezier(.44,.16,.01,1) infinite;
+  }
+}
+
+@keyframes pull-down {
+  0% {
+    transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(75px);
+    -moz-transform: translateY(75px);
+    -webkit-transform: translateY(75px);
+  }
+}

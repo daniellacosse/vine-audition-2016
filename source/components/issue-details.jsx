@@ -84,8 +84,7 @@ export default class IssueDetail extends View {
           </h2>
         </Modal.Header>
         <Alert>
-          <GithubUser inline userData={issueData.user} /> posted
-            {this.since(issueData.created_at)}
+          <GithubUser inline userData={issueData.user} /> posted {this.since(issueData.created_at)}
         </Alert>
         <Modal.Body>
           <Parse linkify>{issueData.body}</Parse>
@@ -103,8 +102,7 @@ export default class IssueDetail extends View {
             {comments.map((comment, i) => {
               let isOriginalUser, responseLine = (
                 <span>
-                  <GithubUser inline userData={comment.user} /> responded
-                    {this.since(comment.created_at)}:
+                  <GithubUser inline userData={comment.user} /> responded {this.since(comment.created_at)}:
                 </span>
               );
 

@@ -1,37 +1,46 @@
 #horizon {
+  .jumping-container, .loading-container {
+    z-index: 99;
+  }
+
   .loading-container {
     position: fixed;
 
     bottom: 10px;
-    left: 10px;
-
-    z-index: 99;
+    left: -9px;
 
     .loader {
       color: white;
-      padding: 20px;
 
-      border-radius: 2px;
-
-      background: rgba(0,0,0,0.8);
+      width: 40px;
+      height: 40px;
     }
   }
 
   .jumping-container {
     position: fixed;
 
-    bottom: 10px;
+    bottom: -60px;
     right: 10px;
 
-    z-index: 99;
+    -webkit-transition: bottom 0.4s cubic-bezier(.44,.16,.01,1);
+    -moz-transition: bottom 0.4s cubic-bezier(.44,.16,.01,1);
+    -o-transition: bottom 0.4s cubic-bezier(.44,.16,.01,1);
+    transition: bottom 0.4s cubic-bezier(.44,.16,.01,1);
 
     .jumper {
       cursor: pointer;
-      padding: 20px;
 
-      border-radius: 2px;
+      width: 30px;
+      height: 30px;
+    }
 
-      background: rgba(0,0,0,0.8);
+    &.jump-to-top {
+      bottom: -30px;
+    }
+
+    &.jump-to-page {
+      bottom: 10px;
     }
   }
 }

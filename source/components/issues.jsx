@@ -1,5 +1,6 @@
 import React from "react";
 import View from "./_view.jsx";
+import { Grid } from "react-bootstrap";
 import Horizon from "./horizon.jsx";
 
 import IssueActions from "../actions/issue-actions";
@@ -7,6 +8,8 @@ import IssueStore from "../stores/issue-store";
 import IssueDetails from "../components/issue-details.jsx";
 
 import connectToStores from "alt-utils/lib/connectToStores";
+
+const PAGE_PREFIX = "page";
 
 class Issues extends View {
   constructor(props) {
@@ -24,11 +27,15 @@ class Issues extends View {
   }
 
   render() {
-    let issues = [].concat.apply([], this.props.issuePages);
-
     return (
-      <Horizon fetcher={this.loadNextPage} fetchDepth={1000}>
-        { issues.map((issue, i) => <IssueDetails issueData={issue} key={i} />) }
+      <Horizon fetcher={this.loadNextPage} fetchDepth={1000} prefix={PAGE_PREFIX}>
+        {this.props.issuePages.map((page, i) => {
+          return (
+            <Grid id={`${PAGE_PREFIX}-${i}`} key={i}>
+              { page.map((issue, j) => <IssueDetails issueData={issue} key={j} />) }
+            </Grid>
+          );
+        })}
       </Horizon>
     );
   }

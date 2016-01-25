@@ -18,7 +18,7 @@
     font-size: 16px;
     margin-top: 16px;
     span.final-word {
-      -webkit-mask-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 40%);
+      -webkit-mask-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
     }
   }
   h3 {
@@ -73,6 +73,9 @@
         background: black;
         color: white;
       }
+    }
+    ul, ol {
+      margin-left: 20px;
     }
     img {
       display: block;
