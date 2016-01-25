@@ -19,12 +19,13 @@ so revised my high level list of things to tackle
 
 * ~~parser component~~
     * emphasized user doesn't have link
-    * emphasize poster's comments
-  * additional css work, then refactoring
-    * spacing, alignment
-    * gradient on last word
-    * colors
+    * ~~emphasize poster's comments~~
+  * ~~additional css work, then refactoring~~
+    * ~~spacing, alignment~~
+    * ~~gradient on last word~~
+    * ~~colors~~
     * ~~left align on comments~~
+    * loading and back icons
 
 * ~~custom dynamic loading component~~
   * ~~then style labels (finally)~~
@@ -34,13 +35,15 @@ so revised my high level list of things to tackle
     * 25 at a time, not 30
 * error handling
   * ~~mainly, run out of requests state~~
-    * should refactor into index w/ issue & error pages
+    * ~~should refactor into index~~ w/ issue & error pages
+
 * component tests
   * any needed refactoring
 * try alt 18 tests once more (will probably post issue on the alt repo today)
   * any needed refactoring (also update alt-slug)
 * misc
   * livereload
+
 * confirm deployment!
 
 #### Old:
