@@ -38,7 +38,7 @@ export default class Parse extends View {
         if (this.props.dropafter) {
           parsedChild = parsedChild.slice(0, this.props.dropafter);
           parsedChild = parsedChild.replace(/(\S+)$/, (match, capture) => {
-            return `<span class="final-word">${capture}</span>`;
+            return `<span class="final-word">${capture}...</span>`;
           });
         }
       }
@@ -47,7 +47,7 @@ export default class Parse extends View {
     });
 
     return (
-      <Markdown container="span" className="parser" options={{linkify: true}}>
+      <Markdown container="span" className="parser" options={{linkify: this.props.linkify, html: true}}>
         {parsedContent}
       </Markdown>
     );
