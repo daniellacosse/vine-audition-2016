@@ -28,6 +28,8 @@ gulp.task("default", [
   "serve"
 ]);
 
+gulp.task("heroku", "default");
+
 gulp.task("babel", () => {
   return gulp.src(get("index.jsx"))
     .pipe(
