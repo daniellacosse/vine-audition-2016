@@ -51,11 +51,11 @@ gulp.task("spritesheet", () => {
     .pipe(
       svgmin()
     )
+    // .pipe(
+    //   svgstore()
+    // )
     .pipe(
-      svgstore()
-    )
-    .pipe(
-      gulp.dest(destination("spritesheet.svg"))
+      gulp.dest(DESTINATION)
     );
 });
 
