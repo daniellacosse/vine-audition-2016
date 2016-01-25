@@ -58,10 +58,18 @@ html {
 
 body {
 	background-color: transparent;
+	font-family: "montserrat";
 }
 
 h1 {
-	font-size: 35px;
+	text-align: center;
+	color: white;
+	font-size: 120px;
+	margin-top: 60px;
+	margin-bottom: 60px;
+	font-weight: 100;
+	padding-left: 100px;
+	padding-right: 100px;
 }
 
 h2 {
@@ -72,11 +80,13 @@ h3 {
 	font-size: 21px;
 }
 
-h1, h2, h3 {
+h2, h3 {
 	font-weight: bold;
 }
 
 code {
+	margin-left: 2px;
+	margin-right: 3px;
 	padding: 2px 5px;
 	background: #444;
 	color: white;
@@ -85,4 +95,13 @@ code {
 pre {
 	margin-top: 5px;
   padding: 5px 10px;
+	margin-bottom: 10px;
+}
+
+a {
+	color: #FFB13C;
+
+	&:hover, &:active {
+		color: #FFA115;
+	}
 }

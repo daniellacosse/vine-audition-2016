@@ -1,8 +1,6 @@
 /* HD */
 @media only screen and (max-width: 1200px) {
-  .modal-dialog {
-    width: 85%;
-  }
+
 }
 
 /* SD */
@@ -12,15 +10,53 @@
 
 /* Tablet */
 @media only screen and (max-width: 768px) {
+  .modal-dialog {
+    width: auto !important;
+  }
 
+  h1 {
+    font-size: 75px !important;
+    padding-right: 60px !important;
+    padding-left: 60px !important;
+  }
+
+  .details-row {
+    border-right: 0px !important;
+    border-left: 0px !important;
+    border-bottom: 1px solid rgba(0,0,0,0.8) !important;
+
+    &:first-child {
+      border-top: 0px !important;
+      border-top-right-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+    }
+  }
 }
 
 /* Phones */
 @media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 40px !important;
+  }
 
+  .details-row {
+    p, pre, code {
+      display: none !important;
+    }
+  }
 }
 
 /* iPhone */
 @media only screen and (max-width: 320px) {
+  h2 {
+    font-size: 20px !important;
+  }
 
+  h3 {
+    font-size: 17px !important;
+  }
+
+  .modal-dialog {
+    width: 300px !important;
+  }
 }
