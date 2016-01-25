@@ -1,23 +1,18 @@
+import axios from "axios";
+import moment from "moment";
+
 import React from "react";
 import View from "./_view.jsx";
-import Parser from "./parser.jsx";
+import Parse from "./parse.jsx";
 import {
-  Row,
-  Col,
-  Modal,
-  Image,
-  Badge,
-  Glyphicon,
-  Grid,
-  Alert
+  Row, Col, Modal, Image, Badge, Glyphicon, Grid, Alert,
+  ListGroup, ListGroupItem
 } from "react-bootstrap";
-import connectToStores from "alt-utils/lib/connectToStores";
 
 import IssueActions from "../actions/issue-actions";
 import IssueStore from "../stores/issue-store";
 
-import axios from "axios";
-import moment from "moment";
+import connectToStores from "alt-utils/lib/connectToStores";
 
 export default class IssueDetail extends View {
   constructor(props) {
@@ -25,104 +20,134 @@ export default class IssueDetail extends View {
 
     this.state.modalOpen = false;
 
-    this.bindFuncs("openModal", "closeModal", "renderComments", "renderLabels");
+    this.bindFuncs(
+      "closeModal",
+      "openModal",
+      "renderComments",
+      "renderInlineAvatar",
+      "renderLabels",
+      "renderModal"
+    );
   }
 
   render() {
-    let {issueObject} = this.props;
-    let {user} = issueObject;
+    let {issueData} = this.props;
+    let {user} = issueData;
 
     return (
       <Row className="details-row" onClick={this.openModal}>
-        <Image src={user.avatar_url} width={60} thumbnail />
-        <Col style={{
-          marginLeft: 73
-        }}>
+        {this.renderAvatar(user, 60)}
+
+        <Col style={{ marginLeft: 73 }}>
           <h3>
-            <a href={user.html_url}>@{user.login}</a>:&nbsp;
-            {issueObject.title}
-            {this.renderLabels()}
+            {this.renderUserLink(user)}: {issueData.title}
+            {this.renderLabels(issueData)}
           </h3>
-            <Parser inline dropafter={140}>{issueObject.body}</Parser>
+          <Parse inline dropafter={140}>{issueData.body}</Parse>
         </Col>
-        {/* TODO: remind who's asking the question w/ timestamp */}
-        <Modal
-          className="montserrat"
-          show={this.state.modalOpen}
-          onHide={this.closeModal}
-        >
-          <Modal.Header>
-            <h2>
-              <Glyphicon style={{ marginRight: 10 }}
-                glyph={(issueObject.state === "open")
-                  ? "unchecked"
-                  : "checked"}
-              />
-              {issueObject.title}
-              {this.renderLabels()}
-            </h2>
-          </Modal.Header>
-          <Modal.Body>
-            <Alert>
-              <Image src={user.avatar_url} width={24} />
-              posted {moment(issueObject.created_at).fromNow()}:
-            </Alert>
-            <Parser>{issueObject.body}</Parser>
-          </Modal.Body>
-          {this.renderComments()}
-        </Modal>
+
+        {this.renderModal(issueData)}
       </Row>
     );
   }
 
-  renderComments() {
-    let {comments} = this.state;
+  // TODO: the hell do labels look like
+  renderLabels(issueData) {
+    if (issueData.labels && issueData.labels.length) {
+      return issueData.labels.map(label => {
+        return (
+          <Badge style={{ background: `#${label.color}`, marginLeft: 10, borderRadius: 1 }}>
+            {label.name.replace(/-/g, " ")}
+          </Badge>
+        );
+      });
+    }
+  }
 
+  renderModal(issueData) {
+    let headerGlyph = (issueData.state === "open") ? "unchecked" : "checked";
+
+    return (
+      <Modal
+        className="montserrat"
+        show={this.state.modalOpen}
+        onHide={this.closeModal}
+        animation={false}
+        keyboard
+      >
+        <Modal.Header>
+          <h2>
+            <Glyphicon style={{ marginRight: 10 }} glyph={headerGlyph} />
+            {issueData.title}
+            {this.renderLabels(issueData)}
+          </h2>
+        </Modal.Header>
+        <Alert>
+          {this.renderInlineAvatar(issueData.user)} posted {this.since(issueData.created_at)}
+        </Alert>
+        <Modal.Body>
+          <Parse>{issueData.body}</Parse>
+        </Modal.Body>
+        {this.renderComments(this.state.comments)}
+      </Modal>
+    );
+  }
+
+  renderComments(comments) {
     if (comments && comments.length) {
       return (
         <Modal.Footer>
-          <Grid className="comment-section">
+          <ListGroup className="comment-section">
             {comments.map((comment) => {
-              let {user} = comment;
-
-              console.log(comment);
+              let responseLine = (
+                <span>
+                  {this.renderInlineAvatar(comment.user)} responded {this.since(comment.created_at)}:
+                </span>
+              );
 
               return (
-                <section className="comment">
-                  <Row className="comment-header">
-                    <Image src={user.avatar_url} width={24}/>
-                    <a href={user.html_url}>@{user.login}</a> responded
-                    <time>{moment(comment.created_at).fromNow()}</time>:
-                  </Row>
-                  <Row className="comment-body">
-                    <Parser inline emphasize={this.props.issueObject.user.login}>
-                      {comment.body}
-                    </Parser>
-                  </Row>
-                </section>
+                <ListGroupItem className="comment" header={responseLine}>
+                  <Parse inline emphasize={this.props.issueData.user.login}>
+                    {comment.body}
+                  </Parse>
+                </ListGroupItem>
               );
             })}
-          </Grid>
+          </ListGroup>
         </Modal.Footer>
       );
     }
   }
 
-  renderLabels() {
-    let {issueObject} = this.props;
-
-    if (issueObject.labels && issueObject.labels.length) {
-      return issueObject.labels.map(label => <Badge>{label}</Badge>);
-    }
-  }
-
   openModal() {
-    axios.get(this.props.issueObject.comments_url).then((response) => {
+    axios.get(this.props.issueData.comments_url).then((response) => {
       this.setState({modalOpen: true, comments: response.data});
     });
   }
 
   closeModal() {
     this.setState({modalOpen: false});
+  }
+
+  since(dateString) {
+    return moment(dateString).fromNow();
+  }
+
+  // TODO: avatar is clearly its own component
+  renderAvatar(user, size) {
+    return <Image src={user.avatar_url} width={size}/>;
+  }
+
+  renderUserLink(user) {
+    return <a href={user.html_url}>@{user.login}</a>;
+  }
+
+  renderInlineAvatar(user, size = 24) {
+    return (
+      <span className="inline-avatar">
+        {this.renderAvatar(user, size)}
+        {this.renderUserLink(user)}
+      </span>
+    );
   }
 }
