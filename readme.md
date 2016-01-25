@@ -20,14 +20,18 @@ so revised my high level list of things to tackle
 * ~~parser component~~
     * emphasized user doesn't have link
     * emphasize poster's comments
-  * additional css work & refactoring
-    * spacing
+  * additional css work, then refactoring
+    * spacing, alignment
     * gradient on last word
     * colors
     * ~~left align on comments~~
 
 * ~~custom dynamic loading component~~
   * ~~then style labels (finally)~~
+  * more sophisticated back logic & UI
+    * hide back on scroll up
+    * option to go to page or all the way to top
+    * 25 at a time, not 30
 * error handling
   * ~~mainly, run out of requests state~~
     * should refactor into index w/ issue & error pages
