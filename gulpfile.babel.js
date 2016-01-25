@@ -10,7 +10,7 @@ import minify_html from "gulp-minify-html";
 import notify from "gulp-notify";
 import packer from "webpack-stream";
 import plumber from "gulp-plumber";
-import sass from "gulp-ruby-sass";
+import less from "gulp-less";
 import sourcemaps from "gulp-sourcemaps";
 import svgmin from "gulp-svgmin";
 import svgstore from "gulp-svgstore";
@@ -62,11 +62,15 @@ gulp.task("spritesheet", () => {
 });
 
 gulp.task("stylesheets", () => {
-  return sass(
-      get_asset("stylesheets/**/*.scss"), { sourcemap: true }
-    )
+  return gulp.src("stylesheets/**/*.scss")
     .pipe(
       plumber(handle_error)
+    )
+    .pipe(
+      sourcemaps.init()
+    )
+    .pipe(
+      less()
     )
     .pipe(
       concat("index.css")
