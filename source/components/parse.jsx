@@ -17,17 +17,17 @@ export default class Parse extends View {
       if (typeof child === "string") {
         parsedChild = child;
 
+        // insert links at "@"
+        parsedChild = parsedChild.replace(/(^|\b)(@[a-zA-Z]+)($|\s)/g, (match, capture) => {
+          return `[${match}](https://github.com/${match.slice(1)})`;
+        });
+
         // emphasize str
         if (this.props.emphasize) {
           parsedChild = parsedChild.replace(this.props.emphasize, (match) => {
             return `**${match}**`;
           });
         }
-
-        // insert links at "@"
-        parsedChild = parsedChild.replace(/\s+@(\w+)/g, (match, capture) => {
-          return `[@${capture}](https://github.com/${capture})`;
-        });
 
         // remove /r if options.inline
         if (this.props.inline) {
@@ -47,7 +47,13 @@ export default class Parse extends View {
     });
 
     return (
-      <Markdown container="span" className="parser" options={{linkify: this.props.linkify, html: true}}>
+      <Markdown
+        container="span"
+        className="parser"
+        options={{
+          linkify: this.props.linkify,
+          html: true
+        }}>
         {parsedContent}
       </Markdown>
     );
