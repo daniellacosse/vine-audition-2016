@@ -6,15 +6,16 @@
   .loading-container {
     position: fixed;
 
+    background: rgba(0,0,0,0.8);
+    border-radius: 100%;
+    border: 1px solid black;
     bottom: 10px;
-    left: -9px;
+    left: 12px;
 
-    .loader {
-      color: white;
-
-      width: 40px;
-      height: 40px;
-    }
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 6px;
+    padding-top: 7px;
   }
 
   .jumping-container {

@@ -19,7 +19,7 @@ so revised my high level list of things to tackle
 
 ### Day 3 (evening):
 just a few non test-related details left:
-  * emphasized user doesn't have link
+  * ~~emphasized user doesn't have link~~
   * 403 && 404 pages
   * ~~deployment~~
 

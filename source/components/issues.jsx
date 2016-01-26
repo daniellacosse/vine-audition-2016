@@ -32,7 +32,7 @@ class Issues extends View {
     return (
       <Horizon
         fetcher={this.loadNextPage}
-        fetchDepth={5000}
+        fetchDepth={2500}
         prefix={PAGE_PREFIX}
       >
         {this.props.issuePages.map((page, i) => {

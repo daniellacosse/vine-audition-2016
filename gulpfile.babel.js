@@ -22,16 +22,14 @@ const DESTINATION = "dist";
 gulp.task("default", gulpSync(gulp).sync([
   [
     "babel:development",
-    "stylesheets:development",
+    "stylesheets",
     "background",
     "spritesheet",
     "fonts",
     "index",
   ],
-  "serve",
-  [
-    "watch_sheets",
-    "watch_scripts",
+  "serve", [
+    "watch",
     "launch_browser"
   ]
 ]));
@@ -45,6 +43,12 @@ gulp.task("distribute", [
   "index",
   "serve"
 ]);
+
+gulp.task("watch", () => {
+  gulp.watch(get("**/*.js"), ["babel:development"]);
+  gulp.watch(get("**/*.jsx"), ["babel:development"]);
+  gulp.watch(get_asset("stylesheets/**/*.scss"), ["stylesheets"]);
+});
 
 gulp.task("babel", () => {
   return gulp.src(get("index.jsx"))
@@ -77,18 +81,14 @@ gulp.task("babel:development", () => {
       )
     )
     .pipe(
+      connect.reload()
+    )
+    .pipe(
       gulp.dest(DESTINATION)
     );
 });
 
-gulp.task("watch_scripts", () => {
-  return gulp.watch(get("**/*.{js|jsx}"), ["babel:development"]);
-});
-
-
 ///\\\///\\\ ASSET TASKS ///\\\///\\\
-
-gulp.task("stylesheets:development", ["stylesheets", "watch_sheets"]);
 
 gulp.task("stylesheets", () => {
   return sass(
@@ -109,12 +109,11 @@ gulp.task("stylesheets", () => {
       sourcemaps.write()
     )
     .pipe(
+      connect.reload()
+    )
+    .pipe(
       gulp.dest(DESTINATION)
     );
-});
-
-gulp.task("watch_sheets", () => {
-  return gulp.watch(get_asset("stylesheets/**/*.scss"), ["stylesheets"]);
 });
 
 gulp.task("background", () => {

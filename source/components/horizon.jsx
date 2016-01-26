@@ -29,7 +29,11 @@ class Horizon extends View {
     let {fetching, canJumpToTop, canJumpToPage} = this.state;
 
     if (this.state.fetching) {
-      loader = <HorizonLoader className="loader fetch-icon" />;
+      loader = (
+        <div className="loading-container">
+          <HorizonLoader className="fetch-icon" />
+        </div>
+      );
     }
 
     if (canJumpToTop) jumpUp = "jump-to-top";
@@ -37,7 +41,7 @@ class Horizon extends View {
 
     return (
       <section id="horizon">
-        <div className="loading-container">{loader}</div>
+        {loader}
         {this.props.children}
         <div className={`jumping-container ${jumpUp}`}>
           <div className="jumper home-icon" onClick={this.jumpToTop} />

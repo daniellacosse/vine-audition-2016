@@ -17,7 +17,7 @@ import IssueStore from "../stores/issue-store";
 
 import connectToStores from "alt-utils/lib/connectToStores";
 
-export default class IssueDetail extends View {
+export default class IssueDetails extends View {
   constructor(props) {
     super(props);
 
@@ -57,7 +57,7 @@ export default class IssueDetail extends View {
     if (issueData.labels && issueData.labels.length) {
       return issueData.labels.map(label => {
         return (
-          <Badge style={{ background: `#${label.color}` }}>
+          <Badge key={label.name} style={{ background: `#${label.color}` }}>
             {label.name.replace(/-/g, " ")}
           </Badge>
         );
@@ -87,7 +87,7 @@ export default class IssueDetail extends View {
           <GithubUser inline userData={issueData.user} /> posted {this.since(issueData.created_at)}
         </Alert>
         <Modal.Body>
-          <Parse linkify>{issueData.body}</Parse>
+          <Parse linkify>{issueData.body || "No details provided."}</Parse>
         </Modal.Body>
         {this.renderComments(this.state.comments, issueData.user)}
       </Modal>
@@ -115,7 +115,7 @@ export default class IssueDetail extends View {
                   className={`comment ${isOriginalUser}`}
                   header={responseLine}
                 >
-                  <Parse inline linkify emphasize={poster.login}>
+                  <Parse inline linkify emphasize={`@${poster.login}`}>
                     {comment.body}
                   </Parse>
                 </ListGroupItem>
