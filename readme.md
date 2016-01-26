@@ -20,9 +20,9 @@ so revised my high level list of things to tackle
 ### Day 3 (evening):
 just a few non test-related details left:
   * ~~emphasized user doesn't have link~~
-  * 403 && 404 pages
+  * ~~403 && 404 pages~~ redirect on 403
   * ~~deployment~~
-  * better open/close icon
+  * ~~better open/close icon~~
 
 ### planned for Day 4 (evening):
   * tests!!!
