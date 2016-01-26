@@ -66,7 +66,8 @@ export default class IssueDetails extends View {
   }
 
   renderModal(issueData) {
-    let headerGlyph = (issueData.state === "open") ? "unchecked" : "checked";
+    let headerGlyph = (issueData.state === "open") ? "alert" : "saved";
+    let headerColor = (issueData.state === "open") ? "green" : "red";
 
     return (
       <Modal
@@ -77,7 +78,7 @@ export default class IssueDetails extends View {
         keyboard
       >
         <Modal.Header>
-          <h2>
+          <h2 style={{ color: headerColor }}>
             <Glyphicon style={{ marginRight: 10 }} glyph={headerGlyph} />
             {issueData.title}
             {this.renderLabels(issueData)}
@@ -124,6 +125,8 @@ export default class IssueDetails extends View {
           </ListGroup>
         </Modal.Footer>
       );
+    } else {
+      return <Modal.Footer>No comments yet.</Modal.Footer>;
     }
   }
 

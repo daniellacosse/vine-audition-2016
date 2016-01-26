@@ -1,5 +1,5 @@
 import alt from "../alt";
-
+import { browserHistory } from "react-router";
 import JAX from "../helpers/ajax-helper";
 
 const ISSUE_API = "https://api.github.com/repos/npm/npm";
@@ -22,14 +22,12 @@ class IssueActions {
           return dispatch(data);
         })
         .catch((err) => {
-          // TODO refactor into error page/as illegal action
+          if (done) done(err);
           if (err.status === 403) {
-            alert("Out of requests. Come back in an hour!");
+            browserHistory.push("/forbidden");
           } else {
             console.error(err);
           }
-
-          done();
         });
     };
   }

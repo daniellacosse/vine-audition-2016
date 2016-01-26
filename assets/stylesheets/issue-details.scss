@@ -53,11 +53,12 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
-  .alert-info {}
   .modal-body {
     background-color: #333;
     color: white;
     font-weight: 200;
+    min-height: 300px;
+
     p {
       margin-bottom: 10px;
     }

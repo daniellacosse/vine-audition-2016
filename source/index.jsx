@@ -21,6 +21,9 @@ render(
       <Route path="/" component={Index}>
         <IndexRoute component={_i.Issues} />
       </Route>
+
+      <Route path="/forbidden" component={_i.Forbidden} />
+      <Route path="*" component={_i.NotFound} />
     </Router>
   ),
   document.getElementById("react-container")

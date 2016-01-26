@@ -1,11 +1,11 @@
 # vine audition 2016
 
 
-(How to run will go here)
+(Summary && how to run will go here)
 
 
 
-### Project scoping
+### Project log
 
 Realistically, as I’ll be limiting myself to the weekend, I’ll be lucky to hit a couple of the features beyond the mvp phase.
 
@@ -15,15 +15,16 @@ MVP mostly complete, minimal test coverage *(alt 18 threw me a curveball, to be 
 ### Day 2:
 realized I should build my own parsing and loading components.
 so revised my high level list of things to tackle
-(may need to spend another afternoon:)
+(may need to spend another afternoon)
 
 ### Day 3 (evening):
 just a few non test-related details left:
   * ~~emphasized user doesn't have link~~
   * 403 && 404 pages
   * ~~deployment~~
+  * better open/close icon
 
-### planned for Day 4 evening:
+### planned for Day 4 (evening):
   * tests!!!
 
 #### Old:
