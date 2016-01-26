@@ -8,27 +8,43 @@ import jpegtran from "imagemin-jpegtran";
 import minify_css from "gulp-minify-css";
 import minify_html from "gulp-minify-html";
 import notify from "gulp-notify";
+import open from "gulp-open";
 import packer from "webpack-stream";
 import plumber from "gulp-plumber";
 import sass from "gulp-ruby-sass";
 import sourcemaps from "gulp-sourcemaps";
 import svgmin from "gulp-svgmin";
-import svgstore from "gulp-svgstore";
 import webpack from "webpack";
+import gulpSync from "gulp-sync";
 
 const DESTINATION = "dist";
 
-gulp.task("default", [
+gulp.task("default", gulpSync(gulp).sync([
+  [
+    "babel:development",
+    "stylesheets:development",
+    "background",
+    "spritesheet",
+    "fonts",
+    "index",
+  ],
+  "serve",
+  [
+    "watch_sheets",
+    "watch_scripts",
+    "launch_browser"
+  ]
+]));
+
+gulp.task("distribute", [
   "babel",
-  "spritesheet",
-  "background",
   "stylesheets",
+  "background",
+  "spritesheet",
   "fonts",
   "index",
   "serve"
 ]);
-
-gulp.task("heroku", ["default"]);
 
 gulp.task("babel", () => {
   return gulp.src(get("index.jsx"))
@@ -37,7 +53,9 @@ gulp.task("babel", () => {
     )
     .pipe(
       packer(
-        packer_settings()
+        packer_settings({
+          minify: true
+        })
       )
     )
     .pipe(
@@ -45,25 +63,38 @@ gulp.task("babel", () => {
     );
 });
 
-gulp.task("spritesheet", () => {
-  return gulp.src(get_asset("images/*.svg"))
+gulp.task("babel:development", () => {
+  return gulp.src(get("index.jsx"))
     .pipe(
       plumber(handle_error)
     )
     .pipe(
-      svgmin()
+      packer(
+        packer_settings({
+          minify: false,
+          sourcemap: true
+        })
+      )
     )
-    // .pipe(
-    //   svgstore()
-    // )
     .pipe(
       gulp.dest(DESTINATION)
     );
 });
 
+gulp.task("watch_scripts", () => {
+  return gulp.watch(get("**/*.{js|jsx}"), ["babel:development"]);
+});
+
+
+///\\\///\\\ ASSET TASKS ///\\\///\\\
+
+gulp.task("stylesheets:development", ["stylesheets", "watch_sheets"]);
+
 gulp.task("stylesheets", () => {
   return sass(
-      get_asset("stylesheets/**/*.scss"), { sourcemap: true }
+      get_asset("stylesheets/**/*.scss"), {
+        sourcemap: true
+      }
     )
     .pipe(
       plumber(handle_error)
@@ -82,19 +113,36 @@ gulp.task("stylesheets", () => {
     );
 });
 
+gulp.task("watch_sheets", () => {
+  return gulp.watch(get_asset("stylesheets/**/*.scss"), ["stylesheets"]);
+});
+
 gulp.task("background", () => {
-    return gulp.src(get_asset("images/background.jpeg"))
-        .pipe(
-          imagemin({
-            progressive: true,
-            use: [
-              jpegtran()
-            ]
-          })
-        )
-        .pipe(
-          gulp.dest(DESTINATION)
-        );
+  return gulp.src(get_asset("images/background.jpeg"))
+    .pipe(
+      imagemin({
+        progressive: true,
+        use: [
+          jpegtran()
+        ]
+      })
+    )
+    .pipe(
+      gulp.dest(DESTINATION)
+    );
+});
+
+gulp.task("spritesheet", () => {
+  return gulp.src(get_asset("images/*.svg"))
+    .pipe(
+      plumber(handle_error)
+    )
+    .pipe(
+      svgmin()
+    )
+    .pipe(
+      gulp.dest(DESTINATION)
+    );
 });
 
 gulp.task("fonts", () => {
@@ -103,12 +151,11 @@ gulp.task("fonts", () => {
       plumber(handle_error)
     )
     .pipe(
-      fontmin()
-    )
-    .pipe(
       gulp.dest(DESTINATION)
     );
 });
+
+///\\\///\\\ INDEX AND SERVE ///\\\///\\\
 
 gulp.task("index", () => {
   return gulp.src(get("index.html"))
@@ -131,20 +178,22 @@ gulp.task("serve", () => {
   });
 });
 
+gulp.task("launch_browser", () => {
+  return gulp.src(__filename)
+    .pipe(
+      open({
+        uri: "http://localhost:9999"
+      })
+    );
+});
+
 ///\\\///\\\ HELPERS ///\\\///\\\
 
-function packer_settings() {
-  return {
-    devtool: "source-map",
-    watch: true,
-    module: {
-      loaders: [{
-        test: /\.(js|jsx)$/,
-        loader: "babel",
-        exclude: /node_modules/
-      }]
-    },
-    plugins: [
+function packer_settings(options) {
+  let plugins;
+
+  if (options.minify) {
+    plugins = [
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false,
@@ -154,7 +203,19 @@ function packer_settings() {
           semicolons: true,
         },
       }),
-    ],
+    ];
+  }
+
+  return {
+    devtool: (options.sourcemap) ? "source-map" : null,
+    module: {
+      loaders: [{
+        test: /\.(js|jsx)$/,
+        loader: "babel",
+        exclude: /node_modules/
+      }]
+    },
+    plugins,
     output: {
       filename: "index.js"
     }
