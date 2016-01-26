@@ -42,7 +42,13 @@ export default class IssueDetails extends View {
 
         <Col style={{ marginLeft: 111 }}>
           <h3>
-            <GithubUser link userData={user} />: {issueData.title}
+            <GithubUser link userData={user} /> (
+                <a
+                  href={issueData.html_url}
+                  onClick={event => event.stopPropagation()}>
+                  #{issueData.number}
+                </a>
+            ): {issueData.title}
             {this.renderLabels(issueData)}
           </h3>
           <Parse inline dropafter={140}>{issueData.body}</Parse>
