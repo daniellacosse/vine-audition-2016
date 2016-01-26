@@ -10,7 +10,7 @@ import minify_html from "gulp-minify-html";
 import notify from "gulp-notify";
 import packer from "webpack-stream";
 import plumber from "gulp-plumber";
-import less from "gulp-less";
+import sass from "gulp-ruby-sass";
 import sourcemaps from "gulp-sourcemaps";
 import svgmin from "gulp-svgmin";
 import svgstore from "gulp-svgstore";
@@ -27,6 +27,8 @@ gulp.task("default", [
   "index",
   "serve"
 ]);
+
+gulp.task("heroku", ["default"]);
 
 gulp.task("babel", () => {
   return gulp.src(get("index.jsx"))
@@ -60,15 +62,11 @@ gulp.task("spritesheet", () => {
 });
 
 gulp.task("stylesheets", () => {
-  return gulp.src("stylesheets/**/*.scss")
+  return sass(
+      get_asset("stylesheets/**/*.scss"), { sourcemap: true }
+    )
     .pipe(
       plumber(handle_error)
-    )
-    .pipe(
-      sourcemaps.init()
-    )
-    .pipe(
-      less()
     )
     .pipe(
       concat("index.css")
