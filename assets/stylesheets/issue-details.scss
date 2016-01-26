@@ -46,6 +46,11 @@
   word-wrap: break-word;
   .modal-header {
     font-weight: 900;
+    .close {
+      margin-top: -16px;
+      margin-right: -4px;
+      font-size: 47px;
+    }
   }
   .alert {
     margin: 0;

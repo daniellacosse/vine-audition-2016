@@ -77,7 +77,7 @@ export default class IssueDetails extends View {
         animation={false}
         keyboard
       >
-        <Modal.Header>
+        <Modal.Header closeButton={true}>
           <h2 style={{ color: headerColor }}>
             <Glyphicon style={{ marginRight: 10 }} glyph={headerGlyph} />
             {issueData.title}
