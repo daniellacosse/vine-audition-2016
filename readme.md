@@ -26,6 +26,8 @@ just a few non test-related details left:
 
 ### planned for Day 4 (evening):
   * tests!!!
+  * horizon: load on scroll pause?
+  * redirect on 403
 
 #### Old:
 
