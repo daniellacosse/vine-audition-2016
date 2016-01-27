@@ -15,7 +15,9 @@ export default class ErrorPage extends View {
           <Row className="error-detail">
             {this.props.detail}
           </Row>
-          <Row>{this.props.children}</Row>
+          <Row className="error-extra">
+            {this.props.children}
+          </Row>
         </Grid>
       </section>
     );

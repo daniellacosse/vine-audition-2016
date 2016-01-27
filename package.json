@@ -42,20 +42,22 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "jsdom": "^7.2.2",
-    "mocha": "^2.3.4",
+    "mocha": "^2.4.2",
     "react-addons-test-utils": "^0.14.6",
     "sinon": "^1.17.2"
   },
   "scripts": {
     "start": "bundle install && npm install && gulp",
-    "test": "./node_modules/.bin/mocha test/**/*.spec.js --ui tdd --compilers js:babel-core/register",
+    "build": "gulp distribute",
+    "test": "mocha _test/**/*.spec.js --ui tdd --require ./_test/test-dom.js --compilers js:babel-core/register",
     "generate": "bash ./_bash/generate.sh",
     "decimate": "bash ./_bash/decimate.sh",
     "release": "git push heroku master",
-    "s": "npm run start",
-    "t": "npm run test",
-    "g": "npm run generate",
+    "b": "npm run build",
     "d": "npm run decimate",
-    "r": "npm run release"
+    "g": "npm run generate",
+    "r": "npm run release",
+    "s": "npm run start",
+    "t": "npm run test"
   }
 }

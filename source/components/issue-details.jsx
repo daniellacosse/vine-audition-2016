@@ -2,7 +2,7 @@
 import axios from "axios";
 import moment from "moment";
 
-import React from "react";
+import React, { PropTypes } from "react";
 import {
   Row, Col, Modal, Image, Badge, Glyphicon, Grid, Alert,
   ListGroup, ListGroupItem
@@ -18,7 +18,7 @@ import IssueStore from "../stores/issue-store";
 import connectToStores from "alt-utils/lib/connectToStores";
 
 ///\\\///\\\ COMPONENT ///\\\///\\\
-export default class IssueDetails extends View {
+class IssueDetails extends View {
   constructor(props) {
     super(props);
 
@@ -149,3 +149,9 @@ export default class IssueDetails extends View {
     return moment(dateString).fromNow();
   }
 }
+
+IssueDetails.propTypes = {
+  issueData: PropTypes.object.isRequired
+};
+
+export default IssueDetails;

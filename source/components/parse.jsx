@@ -47,15 +47,16 @@ export default class Parse extends View {
     });
 
     return (
-      <Markdown
-        container="span"
-        className="parser"
-        options={{
-          linkify: this.props.linkify,
-          html: true
-        }}>
-        {parsedContent}
-      </Markdown>
+      <span className="parsed-text">
+        <Markdown
+          container="span"
+          options={{
+            linkify: this.props.linkify,
+            html: true
+          }}>
+          {parsedContent}
+        </Markdown>
+      </span>
     );
   }
 }

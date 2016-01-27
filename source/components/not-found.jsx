@@ -11,7 +11,13 @@ export default class Forbidden extends View {
         header="Page wasn't found."
         detail="Here's this, though:"
       >
-
+        <iframe
+          frameborder="0"
+          scrolling="no"
+          seamless="seamless"
+          height="300"
+          src="https://vine.co/v/Otx229HnZdL/card?mute=0"
+        />
       </ErrorPage>
     );
   }

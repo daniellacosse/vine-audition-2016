@@ -24,10 +24,11 @@ just a few non test-related details left:
   * ~~deployment~~
   * ~~better open/close icon~~
 
-### planned for Day 4 (evening):
-  * tests!!!
+### Day 4 (evening):
+  * **tests!!!** -- so much for that. Clearly I need to do a deep dive on testing for node and flux. Ruby makes it so easy!!!
   * ~~horizon: load on scroll pause?~~
-  * redirect on 403
+  * ~~redirect on 403~~
+  * TODO joke
 
 #### Old:
 

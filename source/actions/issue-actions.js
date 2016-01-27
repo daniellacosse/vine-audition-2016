@@ -1,5 +1,4 @@
 import alt from "../alt";
-import { browserHistory } from "react-router";
 import JAX from "../helpers/ajax-helper";
 
 const ISSUE_API = "https://api.github.com/repos/npm/npm";
@@ -24,7 +23,7 @@ class IssueActions {
         .catch((err) => {
           if (done) done(err);
           if (err.status === 403) {
-            browserHistory.push("/forbidden");
+            window.location.hash = "forbidden";
           } else {
             console.error(err);
           }

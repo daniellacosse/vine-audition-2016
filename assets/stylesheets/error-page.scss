@@ -9,11 +9,18 @@
     text-align: center;
   }
 
-  .error-detail {
+  .error-detail, .error-extra {
     font-size: 28px;
     color: white;
     text-align: center;
     font-weight: 200;
+  }
+
+  .error-detail {
     margin-top: 10px;
+  }
+
+  .error-extra {
+    margin-top: 35px;
   }
 }

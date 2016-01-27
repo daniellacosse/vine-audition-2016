@@ -1,1 +1,1 @@
-web: node node_modules/gulp/bin/gulp distribute
+web: npm run build
