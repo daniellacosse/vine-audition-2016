@@ -34,7 +34,7 @@ gulp.task("default", gulpSync(gulp).sync([
   ]
 ]));
 
-gulp.task("distribute", [
+gulp.task("build", [
   "babel",
   "stylesheets",
   "background",

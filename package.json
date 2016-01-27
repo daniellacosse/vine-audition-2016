@@ -48,7 +48,7 @@
   },
   "scripts": {
     "start": "bundle install && npm install && gulp",
-    "build": "gulp distribute",
+    "build": "gulp build",
     "test": "mocha _test/**/*.spec.js --ui tdd --require ./_test/test-dom.js --compilers js:babel-core/register",
     "generate": "bash ./_bash/generate.sh",
     "decimate": "bash ./_bash/decimate.sh",
