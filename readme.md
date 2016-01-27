@@ -6,7 +6,7 @@ or, <code>npm run s</code> if you're impatient
 
 or,
 ```
-  bundle install
+bundle install
 npm install
 gulp
 ```
@@ -22,7 +22,7 @@ or, [I also deployed it to heroku.](http://vine-audition-2016.herokuapp.com/)
 ## Where I could improve
 
 * Mainly in the testing department, didn't really follow through with the TDD -- the newest version of alt doesn't really have testing documentation yet. I ate up a lot of time screwing around with that. Once this is in I plan to spend some more time cracking that nut.
-* I would have liked the opportunity to show off my backend skills, but the aforementioned "testgeddon" got in the way. Way in the bottom of this doc you'll see what I mean.
+* I would have liked the opportunity to show off my backend skills, but the aforementioned "testgeddon" got in the way. Way in the bottom of this readme you'll see what I mean.
 
 <hr>
 
