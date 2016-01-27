@@ -7,7 +7,7 @@ export default class View extends Component {
 
 		this.state = {};
 
-		this.bindFuncs("getDOMNode");
+		this.bindFuncs("getDOMNode", "dontBubble");
 	}
 
 	getDOMNode() {
@@ -16,5 +16,9 @@ export default class View extends Component {
 
 	bindFuncs(...funcs) {
 		funcs.forEach(func => this[func] = this[func].bind(this));
+	}
+
+	dontBubble(event) {
+		event.stopPropagation();
 	}
 }

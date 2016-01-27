@@ -28,14 +28,7 @@ export default class GithubUser extends View {
   }
 
   renderUserLink(user) {
-    return (
-      <a
-        href={user.html_url}
-        onClick={this.stopPropagation}
-      >
-        @{user.login}
-      </a>
-    );
+    return <a href={user.html_url} onClick={this.dontBubble}>@{user.login}</a>;
   }
 
   renderInlineAvatar(user, size = THUMB_SIZE) {
@@ -45,9 +38,5 @@ export default class GithubUser extends View {
         {this.renderUserLink(user)}
       </span>
     );
-  }
-
-  stopPropagation(event) {
-    event.stopPropagation();
   }
 }

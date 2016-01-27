@@ -2,7 +2,6 @@ import React from "react";
 import View from "./_view.jsx";
 import { Grid } from "react-bootstrap";
 
-// TODO: use index
 import Horizon from "./horizon.jsx";
 import IssueDetails from "./issue-details.jsx";
 

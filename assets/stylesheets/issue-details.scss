@@ -10,6 +10,9 @@
   word-wrap: break-word;
   background-color: rgba(0,0,0,0.6);
   color: white;
+  .details-text {
+    margin-left: 111px;
+  }
   p,
   .parser,
   .parser p {
@@ -31,7 +34,6 @@
     margin-left: 9px;
     margin-top: 10px;
   }
-  a {}
   &:first-child {
     border-top: 1px solid rgba(255,255,255,0.8);
     border-top-left-radius: 3px;
@@ -46,6 +48,9 @@
   word-wrap: break-word;
   .modal-header {
     font-weight: 900;
+    .glyph {
+      margin-right: 10px;
+    }
     .close {
       margin-top: -16px;
       margin-right: -4px;

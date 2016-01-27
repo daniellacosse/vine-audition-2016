@@ -1,3 +1,4 @@
+///\\\///\\\ DEPENDENCIES ///\\\///\\\
 import axios from "axios";
 import moment from "moment";
 
@@ -7,16 +8,16 @@ import {
   ListGroup, ListGroupItem
 } from "react-bootstrap";
 
-// TODO: use index
 import View from "./_view.jsx";
-import Parse from "./parse.jsx";
 import GithubUser from "./github-user.jsx";
+import Parse from "./parse.jsx";
 
 import IssueActions from "../actions/issue-actions";
 import IssueStore from "../stores/issue-store";
 
 import connectToStores from "alt-utils/lib/connectToStores";
 
+///\\\///\\\ COMPONENT ///\\\///\\\
 export default class IssueDetails extends View {
   constructor(props) {
     super(props);
@@ -40,12 +41,10 @@ export default class IssueDetails extends View {
       <Row className="details-row" onClick={this.openModal}>
         <GithubUser size={78} userData={user} />
 
-        <Col style={{ marginLeft: 111 }}>
+        <Col className="details-text">
           <h3>
             <GithubUser link userData={user} /> (
-                <a
-                  href={issueData.html_url}
-                  onClick={event => event.stopPropagation()}>
+                <a href={issueData.html_url} onClick={this.dontBubble}>
                   #{issueData.number}
                 </a>
             ): {issueData.title}
@@ -85,7 +84,7 @@ export default class IssueDetails extends View {
       >
         <Modal.Header closeButton={true}>
           <h2 style={{ color: headerColor }}>
-            <Glyphicon style={{ marginRight: 10 }} glyph={headerGlyph} />
+            <Glyphicon glyph={headerGlyph} />
             {issueData.title}
             {this.renderLabels(issueData)}
           </h2>

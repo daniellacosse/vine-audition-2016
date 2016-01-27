@@ -8,6 +8,8 @@ import HorizonLoader from "./horizon-loader.jsx";
 import mixin from "react-mixin";
 import { OnScroll } from "react-window-mixins";
 
+// TODO: fine for now but should be re-thought a little bit in the
+// general case (ES7? more options? loader and pagers are seperate components?)
 class Horizon extends View {
   constructor(props) {
     super(props);
@@ -25,19 +27,19 @@ class Horizon extends View {
   }
 
   render() {
-    let loader, jumpUp;
     let {fetching, canJumpToTop, canJumpToPage} = this.state;
+    let loader, jumpUp;
 
-    if (this.state.fetching) {
+    if (canJumpToTop) jumpUp = "jump-to-top";
+    if (canJumpToPage) jumpUp = "jump-to-page";
+
+    if (fetching) {
       loader = (
         <div className="loading-container">
           <HorizonLoader className="fetch-icon" />
         </div>
       );
     }
-
-    if (canJumpToTop) jumpUp = "jump-to-top";
-    if (canJumpToPage) jumpUp = "jump-to-page";
 
     return (
       <section id="horizon">
@@ -70,7 +72,9 @@ class Horizon extends View {
   }
 
   onScroll() {
-    let canJumpToTop, canJumpToPage;
+    clearTimeout(this.state.timeout);
+
+    let canJumpToTop, canJumpToPage, timeout;
 
     let { fetchDepth, children } = this.props;
     let { clientHeight, offsetTop } = this.getDOMNode();
@@ -80,16 +84,15 @@ class Horizon extends View {
 
     if (scrollPosition > window.innerHeight) canJumpToTop = true;
 
-    // TODO: ugh
     if (
-      children.length >= 2 &&
+      children.length > 1 &&
       scrollPosition > document.getElementById(children[1].props.id).offsetTop
     ) canJumpToPage = true;
 
     if ((scrollDepth < fetchDepth) || (clientHeight < fetchDepth))
-      this.fetchChildren();
+      timeout = setTimeout(this.fetchChildren, 250);
 
-    this.setState({ scrollPosition, canJumpToTop, canJumpToPage });
+    this.setState({ scrollPosition, canJumpToTop, canJumpToPage, timeout });
   }
 
   jumpToTop() {
@@ -111,7 +114,6 @@ class Horizon extends View {
     this.props.children.forEach((el, i) => {
       let offset = document.getElementById(el.props.id).offsetTop;
 
-      console.log(this.state.scrollPosition);
       if (offset > this.state.scrollPosition) return;
       else nearestPreviousPageID = i;
     });
